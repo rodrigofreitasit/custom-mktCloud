@@ -159,8 +159,8 @@ function fillForm(inArguments) {
     message.value = dataPayload.message;
     var country = document.getElementById("country");
     country.value = dataPayload.country;
-    var country = document.getElementById("country");
-    country.value = dataPayload.country;
+    var state = document.getElementById("state");
+    state.value = dataPayload.state;
     var zip = document.getElementById("zip");
     zip.value = dataPayload.zip;
   }
