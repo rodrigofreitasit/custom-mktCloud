@@ -2,10 +2,7 @@
   "workflowApiVersion": "1.1",
   "metaData": {
     "icon": "img/logo_code.png",
-    "category": "message",
-    "isConfigured": false,
-    "configurationDisabled": false,
-    "configOnDrop": true
+    "category": "message"
   },
   "type": "REST",
   "lang": {
@@ -20,14 +17,7 @@
   },
   "arguments": {
     "execute": {
-      "inArguments": [
-        {
-          "title": null,
-          "subtitle": null,
-          "message": null,
-          "ctaLink": null
-        }
-      ],
+      "inArguments": [],
       "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net",
       "outArguments": []
     }
