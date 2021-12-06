@@ -50,7 +50,9 @@ function initActivity(data) {
 
   console.log("Has In arguments: " + JSON.stringify(inArguments));
 
-  fillForm(inArguments);
+  if (inArguments) {
+    fillForm(inArguments);
+  }
 
   connection.trigger("updateButton", {
     button: "next",
@@ -65,7 +67,6 @@ function requestedTokens(tokens) {
 
 function fillForm(inArguments) {
   var dataPayload = inArguments;
-  console.log("dataPayload: ", dataPayload);
   var firstName = document.getElementById("firstName");
   firstName.value = dataPayload[0].firstName;
   var lastName = document.getElementById("lastName");
@@ -78,6 +79,10 @@ function fillForm(inArguments) {
   address.value = dataPayload[0].address;
   var message = document.getElementById("message");
   message.value = dataPayload[0].message;
+  var country = document.getElementById("country");
+  country.value = dataPayload[0].country;
+  var country = document.getElementById("country");
+  country.value = dataPayload[0].country;
   var zip = document.getElementById("zip");
   zip.value = dataPayload[0].zip;
 }
