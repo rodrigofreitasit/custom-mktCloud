@@ -69,6 +69,18 @@ function requestedSchema(data) {
     schema = data["schema"];
   }
   console.log("requestedSchema: ", schema);
+  var ul = document.getElementById("ul-variable");
+  for (const i in schema) {
+    var li = document.createElement("li");
+    var text = schema[i].name;
+    li.appendChild(text);
+    li.classList.add(
+      "list-group-item",
+      "d-flex justify-content-between",
+      "lh-sm"
+    );
+    ul.appendChild(li);
+  }
 }
 
 function requestedEndpoints(endpoints) {
@@ -114,13 +126,3 @@ function getMessage() {
   let data = objeto.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.value }), {});
   return data;
 }
-
-// // Max text area count
-// $("textarea").keyup(function () {
-//   var characterCount = $(this).val().length,
-//     current = $("#current"),
-//     maximum = $("#maximum"),
-//     theCount = $("#the-count");
-
-//   current.text(characterCount);
-// });
