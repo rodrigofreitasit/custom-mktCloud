@@ -75,14 +75,13 @@ function requestedSchema(data) {
     var div = document.createElement("div");
     var h6 = document.createElement("h6");
     var text = schema[i].name;
-    li.appendChild(text);
     li.classList.add(
       "list-group-item",
       "d-flex justify-content-between",
       "lh-sm"
     );
     h6.classList.add("my-0");
-    h6.appendChild(text);
+    h6.innerHTML(text);
     div.appendChild(h6);
     li.appendChild(div);
     ul.appendChild(li);
