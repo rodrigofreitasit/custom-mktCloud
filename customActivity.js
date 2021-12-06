@@ -64,6 +64,8 @@ function requestedTokens(tokens) {
 }
 
 function fillForm(inArguments) {
+  var dataPayload = inArguments;
+  console.log("dataPayload: ", dataPayload);
   var firstName = document.getElementById("firstName");
   firstName = inArguments[0].firstName;
   var lastName = document.getElementById("lastName");
