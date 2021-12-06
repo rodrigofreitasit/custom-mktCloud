@@ -3,7 +3,6 @@
 var connection = new Postmonger.Session();
 var payload = {};
 var schema = {};
-var dataPayload = [];
 
 $(window).ready(onRender);
 connection.on("initActivity", initActivity);
@@ -143,23 +142,22 @@ function getMessage() {
 }
 
 function fillForm(inArguments) {
-  dataPayload = inArguments;
   var firstName = document.getElementById("firstName");
-  firstName.value = dataPayload[0].firstName;
+  firstName.value = inArguments[0].firstName;
   var lastName = document.getElementById("lastName");
-  lastName.value = dataPayload[0].lastName;
+  lastName.value = inArguments[0].lastName;
   var username = document.getElementById("username");
-  username.value = dataPayload[0].username;
+  username.value = inArguments[0].username;
   var email = document.getElementById("email");
-  email.value = dataPayload[0].email;
+  email.value = inArguments[0].email;
   var address = document.getElementById("address");
-  address.value = dataPayload[0].address;
+  address.value = inArguments[0].address;
   var message = document.getElementById("message");
-  message.value = dataPayload[0].message;
+  message.value = inArguments[0].message;
   var country = document.getElementById("country");
-  country.value = dataPayload[0].country;
+  country.value = inArguments[0].country;
   var country = document.getElementById("country");
-  country.value = dataPayload[0].country;
+  country.value = inArguments[0].country;
   var zip = document.getElementById("zip");
-  zip.value = dataPayload[0].zip;
+  zip.value = inArguments[0].zip;
 }
