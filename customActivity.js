@@ -67,19 +67,19 @@ function fillForm(inArguments) {
   var dataPayload = inArguments;
   console.log("dataPayload: ", dataPayload);
   var firstName = document.getElementById("firstName");
-  firstName = inArguments[0].firstName;
+  firstName = dataPayload[0].firstName;
   var lastName = document.getElementById("lastName");
-  lastName = inArguments[0].lastName;
+  lastName = dataPayload[0].lastName;
   var username = document.getElementById("username");
-  username = inArguments[0].username;
+  username = dataPayload[0].username;
   var email = document.getElementById("email");
-  email = inArguments[0].email;
+  email = dataPayload[0].email;
   var address = document.getElementById("address");
-  address = inArguments[0].address;
+  address = dataPayload[0].address;
   var message = document.getElementById("message");
-  message = inArguments[0].message;
+  message = dataPayload[0].message;
   var zip = document.getElementById("zip");
-  zip = inArguments[0].zip;
+  zip = dataPayload[0].zip;
 }
 
 // Broadcast in response to a requestSchema event called by the custom application.
