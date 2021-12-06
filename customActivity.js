@@ -3,6 +3,7 @@
 var connection = new Postmonger.Session();
 var payload = {};
 var schema = {};
+var dataPayload = [];
 
 $(window).ready(onRender);
 connection.on("initActivity", initActivity);
@@ -63,28 +64,6 @@ function initActivity(data) {
 
 function requestedTokens(tokens) {
   console.log("requestedTokens: ", tokens);
-}
-
-function fillForm(inArguments) {
-  var dataPayload = inArguments;
-  var firstName = document.getElementById("firstName");
-  firstName.value = dataPayload[0].firstName;
-  var lastName = document.getElementById("lastName");
-  lastName.value = dataPayload[0].lastName;
-  var username = document.getElementById("username");
-  username.value = dataPayload[0].username;
-  var email = document.getElementById("email");
-  email.value = dataPayload[0].email;
-  var address = document.getElementById("address");
-  address.value = dataPayload[0].address;
-  var message = document.getElementById("message");
-  message.value = dataPayload[0].message;
-  var country = document.getElementById("country");
-  country.value = dataPayload[0].country;
-  var country = document.getElementById("country");
-  country.value = dataPayload[0].country;
-  var zip = document.getElementById("zip");
-  zip.value = dataPayload[0].zip;
 }
 
 // Broadcast in response to a requestSchema event called by the custom application.
@@ -161,4 +140,26 @@ function getMessage() {
   }
   let data = obj.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.value }), {});
   return data;
+}
+
+function fillForm(inArguments) {
+  dataPayload = inArguments;
+  var firstName = document.getElementById("firstName");
+  firstName.value = dataPayload[0].firstName;
+  var lastName = document.getElementById("lastName");
+  lastName.value = dataPayload[0].lastName;
+  var username = document.getElementById("username");
+  username.value = dataPayload[0].username;
+  var email = document.getElementById("email");
+  email.value = dataPayload[0].email;
+  var address = document.getElementById("address");
+  address.value = dataPayload[0].address;
+  var message = document.getElementById("message");
+  message.value = dataPayload[0].message;
+  var country = document.getElementById("country");
+  country.value = dataPayload[0].country;
+  var country = document.getElementById("country");
+  country.value = dataPayload[0].country;
+  var zip = document.getElementById("zip");
+  zip.value = dataPayload[0].zip;
 }
