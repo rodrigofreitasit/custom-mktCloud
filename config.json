@@ -1,0 +1,54 @@
+{
+  "workflowApiVersion": "1.1",
+  "metaData": {
+    "icon": "img/icon.png",
+    "category": "message",
+    "isConfigured": false,
+    "configurationDisabled": false,
+    "configOnDrop": true
+  },
+  "type": "REST",
+  "lang": {
+    "en-US": {
+      "name": "POC - Custom Activity (UAT)",
+      "description": "A custom Journey Builder activity using workflow API v1.1 format."
+    },
+    "pt-BR": {
+      "name": "POC -  Atividade Customizada (UAT)",
+      "description": "Uma atividade customizada para journey builder utilizando workflow API V1.1"
+    }
+  },
+  "arguments": {
+    "execute": {
+      "inArguments": [
+        {
+          "title": null,
+          "subtitle": null,
+          "message": null,
+          "ctaLink": null
+        }
+      ],
+      "url": "https://9d2bfcb26394a39d07dcd4cfb7b41551.m.pipedream.net",
+      "outArguments": []
+    }
+  },
+  "configurationArguments": {
+    "save": {
+      "url": "https://9d2bfcb26394a39d07dcd4cfb7b41551.m.pipedream.net"
+    },
+    "publish": {
+      "url": "https://9d2bfcb26394a39d07dcd4cfb7b41551.m.pipedream.net"
+    },
+    "validate": {
+      "url": "https://9d2bfcb26394a39d07dcd4cfb7b41551.m.pipedream.net"
+    },
+    "stop": {
+      "url": "https://9d2bfcb26394a39d07dcd4cfb7b41551.m.pipedream.net"
+    }
+  },
+  "userInterfaces": {
+    "configModal": {
+      "fullscreen": true
+    }
+  }
+}
