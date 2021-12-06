@@ -90,7 +90,7 @@ function requestedSchema(data) {
       li.appendChild(div);
       ul.appendChild(li);
     }
-  }, 5000);
+  }, 3000);
 }
 
 function requestedEndpoints(endpoints) {
@@ -126,7 +126,7 @@ function save() {
 
 function getMessage() {
   var objeto = [];
-  var inputs = document.getElementsByTagName("input");
+  var inputs = document.querySelectorAll("input,textarea");
   var arr = Array.from(inputs);
   for (var i in arr) {
     let id = arr[i].id;
