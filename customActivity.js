@@ -50,6 +50,8 @@ function initActivity(data) {
 
   console.log("Has In arguments: " + JSON.stringify(inArguments));
 
+  fillForm(inArguments);
+
   connection.trigger("updateButton", {
     button: "next",
     text: "done",
@@ -59,6 +61,23 @@ function initActivity(data) {
 
 function requestedTokens(tokens) {
   console.log("requestedTokens: ", tokens);
+}
+
+function fillForm(inArguments) {
+  var firstName = document.getElementById("firstName");
+  firstName = inArguments[0].firstName;
+  var lastName = document.getElementById("lastName");
+  lastName = inArguments[0].lastName;
+  var username = document.getElementById("username");
+  username = inArguments[0].username;
+  var email = document.getElementById("email");
+  email = inArguments[0].email;
+  var address = document.getElementById("address");
+  address = inArguments[0].address;
+  var message = document.getElementById("message");
+  message = inArguments[0].message;
+  var zip = document.getElementById("zip");
+  zip = inArguments[0].zip;
 }
 
 // Broadcast in response to a requestSchema event called by the custom application.
