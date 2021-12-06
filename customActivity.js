@@ -3,6 +3,7 @@
 var connection = new Postmonger.Session();
 var payload = {};
 var schema = {};
+var dataPayload = [];
 
 $(window).ready(onRender);
 connection.on("initActivity", initActivity);
@@ -142,22 +143,25 @@ function getMessage() {
 }
 
 function fillForm(inArguments) {
-  var firstName = document.getElementById("firstName");
-  firstName.value = inArguments[0].firstName;
-  var lastName = document.getElementById("lastName");
-  lastName.value = inArguments[0].lastName;
-  var username = document.getElementById("username");
-  username.value = inArguments[0].username;
-  var email = document.getElementById("email");
-  email.value = inArguments[0].email;
-  var address = document.getElementById("address");
-  address.value = inArguments[0].address;
-  var message = document.getElementById("message");
-  message.value = inArguments[0].message;
-  var country = document.getElementById("country");
-  country.value = inArguments[0].country;
-  var country = document.getElementById("country");
-  country.value = inArguments[0].country;
-  var zip = document.getElementById("zip");
-  zip.value = inArguments[0].zip;
+  dataPayload = inArguments[0];
+  if (dataPayload) {
+    var firstName = document.getElementById("firstName");
+    firstName.value = dataPayload.firstName;
+    var lastName = document.getElementById("lastName");
+    lastName.value = dataPayload.lastName;
+    var username = document.getElementById("username");
+    username.value = dataPayload.username;
+    var email = document.getElementById("email");
+    email.value = dataPayload.email;
+    var address = document.getElementById("address");
+    address.value = dataPayload.address;
+    var message = document.getElementById("message");
+    message.value = dataPayload.message;
+    var country = document.getElementById("country");
+    country.value = dataPayload.country;
+    var country = document.getElementById("country");
+    country.value = dataPayload.country;
+    var zip = document.getElementById("zip");
+    zip.value = dataPayload.zip;
+  }
 }
