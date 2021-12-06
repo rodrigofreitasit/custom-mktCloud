@@ -72,6 +72,8 @@ function requestedSchema(data) {
   var ul = document.getElementById("ul-variable");
   for (const i in schema) {
     var li = document.createElement("li");
+    var div = document.createElement("div");
+    var h6 = document.createElement("h6");
     var text = schema[i].name;
     li.appendChild(text);
     li.classList.add(
@@ -79,6 +81,10 @@ function requestedSchema(data) {
       "d-flex justify-content-between",
       "lh-sm"
     );
+    h6.classList.add("my-0");
+    h6.appendChild(text);
+    div.appendChild(h6);
+    li.appendChild(div);
     ul.appendChild(li);
   }
 }
