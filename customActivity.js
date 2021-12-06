@@ -125,14 +125,14 @@ function save() {
 }
 
 function getMessage() {
-  var objeto = [];
-  var inputs = document.querySelectorAll("input,textarea");
+  var obj = [];
+  var inputs = document.querySelectorAll("input,textarea,select");
   var arr = Array.from(inputs);
   for (var i in arr) {
     let id = arr[i].id;
     let value = arr[i].value;
-    objeto.push({ id: id, value: value });
+    obj.push({ id: id, value: value });
   }
-  let data = objeto.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.value }), {});
+  let data = obj.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.value }), {});
   return data;
 }
