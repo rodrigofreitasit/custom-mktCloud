@@ -73,7 +73,7 @@ function requestedSchema(data) {
   } else {
     schema = data["schema"];
   }
-  console.log("requestedSchema: ", schema);
+  // console.log("requestedSchema: ", schema);
   var ul = document.getElementById("ul-variable");
   var spinner = document.getElementById("spinner");
   setTimeout(function () {
@@ -99,24 +99,22 @@ function requestedSchema(data) {
 }
 
 function requestedEndpoints(endpoints) {
-  console.log("endpoints: ", endpoints);
+  // console.log("endpoints: ", endpoints);
 }
 
 function requestedInteractionDefaults(settings) {
-  console.log("requestedInteractionDefaults: ", settings);
+  // console.log("requestedInteractionDefaults: ", settings);
 }
 
 function requestedInteraction(interaction) {
-  console.log("requestedInteraction: ", interaction);
+  // console.log("requestedInteraction: ", interaction);
 }
 
 function requestedTriggerEventDefinition(eventDefinitionModel) {
-  console.log(
-    "requestedTriggerEventDefinition: ",
-    eventDefinitionModel.eventDefinitionKey
-  );
-  var eventDefinitionKey = eventDefinitionModel.eventDefinitionKey;
-  return eventDefinitionKey;
+  // console.log(
+  //   "requestedTriggerEventDefinition: ",
+  //   eventDefinitionModel.eventDefinitionKey
+  // );
 }
 
 // Ao clicar em done é atualizado o Payload com a configuração do Objeto
@@ -147,6 +145,7 @@ function getMessage() {
 
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
+  console.log("dataPayload: ", dataPayload);
   let dataPayloadTreated = treatMessageToForm(dataPayload);
   if (dataPayloadTreated) {
     var firstName = document.getElementById("firstName");
@@ -185,6 +184,7 @@ function treatMessage(msg) {
 
 function treatMessageToForm(msg) {
   var dataPayloadToTreat = msg;
+  console.log("dataPayloadToTreat: ", dataPayloadToTreat);
   if (dataPayloadToTreat) {
     for (const i in schema) {
       let keyDE = schema[i].key;
