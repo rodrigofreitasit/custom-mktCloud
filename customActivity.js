@@ -184,7 +184,6 @@ function treatMessage(msg) {
 
 function treatMessageToForm(msg) {
   var dataPayloadToTreat = msg;
-  console.log("dataPayloadToTreat: ", dataPayloadToTreat);
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
       var property = dataPayloadToTreat[i];
@@ -197,6 +196,7 @@ function treatMessageToForm(msg) {
         }
       }
     }
+    console.log("dataPayloadToTreat!!: ", dataPayloadToTreat);
     return dataPayloadToTreat;
   }
 }
