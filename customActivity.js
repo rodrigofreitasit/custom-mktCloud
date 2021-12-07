@@ -63,7 +63,7 @@ function initActivity(data) {
 }
 
 function requestedTokens(tokens) {
-  console.log("requestedTokens: ", tokens);
+  // console.log("requestedTokens: ", tokens);
 }
 
 // Broadcast in response to a requestSchema event called by the custom application.
@@ -186,11 +186,16 @@ function treatMessageToForm(msg) {
   var dataPayloadToTreat = msg;
   console.log("dataPayloadToTreat: ", dataPayloadToTreat);
   if (dataPayloadToTreat) {
-    for (const i in schema) {
-      let keyDE = schema[i].key;
-      let nameDE = schema[i].name;
-      let varName = `<<${nameDE}>>`;
-      dataPayloadToTreat = dataPayloadToTreat.replace(keyDE, varName);
+    for (const i in dataPayloadToTreat) {
+      var property = dataPayloadToTreat[i];
+      if (property.indexOf("Event.DEAudience") >= 0) {
+        for (const j in schema) {
+          let keyDE = schema[j].key;
+          let nameDE = schema[j].name;
+          let varName = `<<${nameDE}>>`;
+          dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
+        }
+      }
     }
     return dataPayloadToTreat;
   }
