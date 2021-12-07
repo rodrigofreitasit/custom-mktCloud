@@ -52,8 +52,8 @@ function initActivity(data) {
   // console.log("Has In arguments: " + JSON.stringify(inArguments));
 
   if (inArguments) {
-    // fillForm(inArguments);
-    treatMessageToForm(inArguments);
+    fillForm(inArguments);
+    // treatMessageToForm(inArguments);
   }
 
   connection.trigger("updateButton", {
@@ -142,35 +142,6 @@ function getMessage() {
   }
   let data = obj.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.value }), {});
   return data;
-}
-
-function treatMessageToForm(msg) {
-  var dataPayloadToTreat = msg;
-
-  for (const i in dataPayloadToTreat) {
-    var property = dataPayloadToTreat[i];
-    console.log("property: ", property.message);
-    // if (property.message.indexOf("Event.DEAudience") >= 0) {
-    console.log("entrou no if");
-    updateVariables(property);
-    // }
-  }
-  console.log("property_step2 :", property);
-  return dataPayloadToTreat;
-}
-
-function updateVariables(data) {
-  let dataObjs = data;
-  for (var j in schema) {
-    console.log("entrou no for");
-    let keyDE = schema[j].key;
-    let nameDE = schema[j].name;
-    let varName = `<<${nameDE}>>`;
-    // dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
-    dataObjs.message = dataObjs.message.replace(keyDE, varName);
-  }
-  console.log("dentro updateVariables: ", dataObjs);
-  // return dataObjs;
 }
 
 function treatMessage(msg) {
