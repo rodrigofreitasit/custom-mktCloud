@@ -3,13 +3,15 @@
 var connection = new Postmonger.Session();
 var payload = {};
 var schema = {};
+var schema2 = {};
 var dataPayload = [];
 
 $(window).ready(onRender);
+connection.on("requestedSchema", schema2);
+connection.on("requestedSchema", requestedSchema);
 connection.on("initActivity", initActivity);
 connection.on("clickedNext", save);
 connection.on("requestedTokens", requestedTokens);
-connection.on("requestedSchema", requestedSchema);
 connection.on("requestedEndpoints", requestedEndpoints);
 connection.on("requestedInteractionDefaults", requestedInteractionDefaults);
 connection.on("requestedInteraction", requestedInteraction);
@@ -52,7 +54,7 @@ function initActivity(data) {
   // console.log("Has In arguments: " + JSON.stringify(inArguments));
 
   if (inArguments) {
-    console.log("schema: ", schema);
+    console.log("schema2: ", schema2);
     fillForm(inArguments);
     // treatMessageToForm(inArguments);
   }
@@ -69,6 +71,9 @@ function requestedTokens(tokens) {
 }
 
 // Broadcast in response to a requestSchema event called by the custom application.
+function schema2(data) {
+  return (schema2 = data["schema"]);
+}
 function requestedSchema(data) {
   if (data.error) {
     console.error("requestedSchema Error: ", data.error);
