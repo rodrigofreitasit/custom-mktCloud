@@ -146,6 +146,8 @@ function getMessage() {
 
 function treatMessageToForm(msg) {
   var dataPayloadToTreat = msg;
+  console.log("typeof: ", typeof dataPayload);
+  console.log("dataPayloadToTreat_step1: ", dataPayloadToTreat);
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
       var property = dataPayloadToTreat[i];
@@ -159,7 +161,7 @@ function treatMessageToForm(msg) {
         }
       }
     }
-    console.log("dataPayloadToTreat :", dataPayloadToTreat);
+    console.log("dataPayloadToTreat_step2 :", dataPayloadToTreat);
     return dataPayloadToTreat;
   }
 }
