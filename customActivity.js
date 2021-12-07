@@ -146,13 +146,17 @@ function getMessage() {
 
 function treatMessageToForm(msg) {
   var dataPayloadToTreat = msg;
-  console.log("dataPayloadToTreat: ", dataPayloadToTreat);
+
   for (const i in dataPayloadToTreat) {
-    console.log("property: ", dataPayloadToTreat[i]);
-    updateVariables(dataPayloadToTreat[i]);
+    var property = dataPayloadToTreat[i];
+    console.log("property: ", property.message);
+    // if (property.message.indexOf("Event.DEAudience") >= 0) {
+    console.log("entrou no if");
+    updateVariables(property);
+    // }
   }
-  console.log("property_step2 :", dataPayloadToTreat);
-  // return dataPayloadToTreat;
+  console.log("property_step2 :", property);
+  return dataPayloadToTreat;
 }
 
 function updateVariables(data) {
