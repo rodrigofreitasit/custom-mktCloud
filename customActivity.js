@@ -49,7 +49,7 @@ function initActivity(data) {
     ? payload["arguments"].execute.inArguments
     : {};
 
-  console.log("Has In arguments: " + JSON.stringify(inArguments));
+  // console.log("Has In arguments: " + JSON.stringify(inArguments));
 
   if (inArguments) {
     fillForm(inArguments);
@@ -143,6 +143,38 @@ function getMessage() {
   return data;
 }
 
+function treatMessageToForm(dataPayload) {
+  var dataPayloadToTreat = dataPayload;
+  if (dataPayloadToTreat || typeof dataPayloadToTreat != "undefined") {
+    for (const i in dataPayloadToTreat) {
+      var property = dataPayloadToTreat[i];
+      if (property.indexOf("Event.DEAudience") >= 0) {
+        for (const j in schema) {
+          let keyDE = schema[j].key;
+          let nameDE = schema[j].name;
+          let varName = `<<${nameDE}>>`;
+          dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
+        }
+      }
+    }
+    // console.log("dataPayloadToTreat!!: ", dataPayloadToTreat);
+    return dataPayloadToTreat;
+  }
+}
+
+function treatMessage(msg) {
+  var messageToTreat = msg;
+  if (messageToTreat) {
+    for (const i in schema) {
+      let keyDE = schema[i].key;
+      let nameDE = schema[i].name;
+      let varName = `<<${nameDE}>>`;
+      messageToTreat = messageToTreat.replace(varName, keyDE);
+    }
+    return messageToTreat;
+  }
+}
+
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
   var dataPayloadTreated = treatMessageToForm(dataPayload);
@@ -166,37 +198,5 @@ function fillForm(inArguments) {
     state.value = dataPayloadTreated.state;
     var zip = document.getElementById("zip");
     zip.value = dataPayloadTreated.zip;
-  }
-}
-
-function treatMessage(msg) {
-  var messageToTreat = msg;
-  if (messageToTreat) {
-    for (const i in schema) {
-      let keyDE = schema[i].key;
-      let nameDE = schema[i].name;
-      let varName = `<<${nameDE}>>`;
-      messageToTreat = messageToTreat.replace(varName, keyDE);
-    }
-    return messageToTreat;
-  }
-}
-
-function treatMessageToForm(dataPayload) {
-  var dataPayloadToTreat = dataPayload;
-  if (dataPayloadToTreat) {
-    for (const i in dataPayloadToTreat) {
-      var property = dataPayloadToTreat[i];
-      if (property.indexOf("Event.DEAudience") >= 0) {
-        for (const j in schema) {
-          let keyDE = schema[j].key;
-          let nameDE = schema[j].name;
-          let varName = `<<${nameDE}>>`;
-          dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
-        }
-      }
-    }
-    // console.log("dataPayloadToTreat!!: ", dataPayloadToTreat);
-    return dataPayloadToTreat;
   }
 }
