@@ -123,9 +123,7 @@ function requestedTriggerEventDefinition(eventDefinitionModel) {
 function save() {
   var bodyMessage = getMessage();
   var messageTreated = treatMessage(bodyMessage.message);
-  console.log("messageTreated: ", messageTreated);
   bodyMessage.message = messageTreated;
-  console.log("bodyMessage: ", bodyMessage.message);
   payload["arguments"].execute.inArguments = [bodyMessage];
 
   payload["metaData"].isConfigured = true;
@@ -149,25 +147,26 @@ function getMessage() {
 
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
-  if (dataPayload) {
+  let dataPayloadTreated = treatMessageToForm(dataPayload);
+  if (dataPayloadTreated) {
     var firstName = document.getElementById("firstName");
-    firstName.value = dataPayload.firstName;
+    firstName.value = dataPayloadTreated.firstName;
     var lastName = document.getElementById("lastName");
-    lastName.value = dataPayload.lastName;
+    lastName.value = dataPayloadTreated.lastName;
     var username = document.getElementById("username");
-    username.value = dataPayload.username;
+    username.value = dataPayloadTreated.username;
     var email = document.getElementById("email");
-    email.value = dataPayload.email;
+    email.value = dataPayloadTreated.email;
     var address = document.getElementById("address");
-    address.value = dataPayload.address;
+    address.value = dataPayloadTreated.address;
     var message = document.getElementById("message");
-    message.value = dataPayload.message;
+    message.value = dataPayloadTreated.message;
     var country = document.getElementById("country");
-    country.value = dataPayload.country;
+    country.value = dataPayloadTreated.country;
     var state = document.getElementById("state");
-    state.value = dataPayload.state;
+    state.value = dataPayloadTreated.state;
     var zip = document.getElementById("zip");
-    zip.value = dataPayload.zip;
+    zip.value = dataPayloadTreated.zip;
   }
 }
 
@@ -181,5 +180,18 @@ function treatMessage(msg) {
       messageToTreat = messageToTreat.replace(varName, keyDE);
     }
     return messageToTreat;
+  }
+}
+
+function treatMessageToForm(msg) {
+  var dataPayloadToTreat = msg;
+  if (dataPayloadToTreat) {
+    for (const i in schema) {
+      let keyDE = schema[i].key;
+      let nameDE = schema[i].name;
+      let varName = `<<${nameDE}>>`;
+      dataPayloadToTreat = dataPayloadToTreat.replace(keyDE, varName);
+    }
+    return dataPayloadToTreat;
   }
 }
