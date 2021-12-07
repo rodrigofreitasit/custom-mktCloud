@@ -52,7 +52,8 @@ function initActivity(data) {
   // console.log("Has In arguments: " + JSON.stringify(inArguments));
 
   if (inArguments) {
-    fillForm(inArguments, schema);
+    console.log("schema: ", schema);
+    fillForm(inArguments);
     // treatMessageToForm(inArguments);
   }
 
@@ -158,23 +159,17 @@ function treatMessage(msg) {
   }
 }
 
-function treatMessageToForm(msg, schema) {
+function treatMessageToForm(msg) {
   var dataPayloadToTreat = msg;
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
       var property = dataPayloadToTreat[i];
-      console.log("schema0: ", schema);
       if (property.indexOf("Event.DEAudience") >= 0) {
         for (let index in schema) {
-          console.log("schema1: ", schema);
-          console.log("property: ", property);
           let keyDE = schema[index].key;
           let nameDE = schema[index].name;
           let varName = `<<${nameDE}>>`;
-          dataPayloadToTreat[i].message = dataPayloadToTreat[i].message.replace(
-            keyDE,
-            varName
-          );
+          dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
         }
       }
     }
@@ -183,9 +178,9 @@ function treatMessageToForm(msg, schema) {
   }
 }
 
-function fillForm(inArguments, schema) {
+function fillForm(inArguments) {
   dataPayload = inArguments[0];
-  treatMessageToForm(dataPayload, schema);
+  treatMessageToForm(dataPayload);
   if (dataPayload) {
     var firstName = document.getElementById("firstName");
     firstName.value = dataPayload.firstName;
