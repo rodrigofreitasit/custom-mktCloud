@@ -146,31 +146,27 @@ function getMessage() {
 
 function treatMessageToForm(msg) {
   var dataPayloadToTreat = msg;
-
+  console.log("dataPayloadToTreat: ", dataPayloadToTreat);
   for (const i in dataPayloadToTreat) {
-    var property = dataPayloadToTreat[i];
-    console.log("property: ", property.message);
-    if (property.message.indexOf("Event.DEAudience") >= 0) {
-      console.log("entrou no if");
-      updateVariables(property.message);
-    }
+    console.log("property: ", dataPayloadToTreat[i]);
+    updateVariables(dataPayloadToTreat[i]);
   }
-  console.log("property_step2 :", property);
-  return dataPayloadToTreat;
+  console.log("property_step2 :", dataPayloadToTreat);
+  // return dataPayloadToTreat;
 }
 
 function updateVariables(data) {
-  let dataObjs = data;
-  for (var j in schema) {
-    console.log("entrou no for");
-    let keyDE = schema[j].key;
-    let nameDE = schema[j].name;
-    let varName = `<<${nameDE}>>`;
-    // dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
-    dataObjs = dataObjs.replace(keyDE, varName);
-    console.log("dentro do for", dataObjs);
-  }
-  return dataObjs;
+  // let dataObjs = data;
+  // for (var j in schema) {
+  //   console.log("entrou no for");
+  //   let keyDE = schema[j].key;
+  //   let nameDE = schema[j].name;
+  //   let varName = `<<${nameDE}>>`;
+  //   // dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
+  //   dataObjs = dataObjs.replace(keyDE, varName);
+  console.log("dentro updateVariables: ", data);
+  // }
+  // return dataObjs;
 }
 
 function treatMessage(msg) {
