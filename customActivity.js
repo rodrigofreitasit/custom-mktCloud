@@ -157,7 +157,7 @@ function treatMessageToForm(dataPayload) {
         }
       }
     }
-    // console.log("dataPayloadToTreat!!: ", dataPayloadToTreat);
+    console.log("dataPayloadToTreat!!: ", dataPayloadToTreat);
     return dataPayloadToTreat;
   }
 }
