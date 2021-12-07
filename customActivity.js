@@ -174,9 +174,9 @@ function fillForm(inArguments) {
 function treatMessage(msg) {
   var messageToTreat = msg;
   if (messageToTreat) {
-    for (const i in schemaDE) {
-      let keyDE = schemaDE[i].key;
-      let nameDE = schemaDE[i].name;
+    for (const i in schema) {
+      let keyDE = schema[i].key;
+      let nameDE = schema[i].name;
       let varName = `<<${nameDE}>>`;
       messageToTreat = messageToTreat.replace(varName, keyDE);
     }
