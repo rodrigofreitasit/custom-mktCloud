@@ -159,24 +159,24 @@ function treatMessage(msg) {
 
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
-  if (dataPayloadTreated) {
+  if (dataPayload) {
     var firstName = document.getElementById("firstName");
-    firstName.value = dataPayloadTreated.firstName;
+    firstName.value = dataPayload.firstName;
     var lastName = document.getElementById("lastName");
-    lastName.value = dataPayloadTreated.lastName;
+    lastName.value = dataPayload.lastName;
     var username = document.getElementById("username");
-    username.value = dataPayloadTreated.username;
+    username.value = dataPayload.username;
     var email = document.getElementById("email");
-    email.value = dataPayloadTreated.email;
+    email.value = dataPayload.email;
     var address = document.getElementById("address");
-    address.value = dataPayloadTreated.address;
+    address.value = dataPayload.address;
     var message = document.getElementById("message");
-    message.value = dataPayloadTreated.message;
+    message.value = dataPayload.message;
     var country = document.getElementById("country");
-    country.value = dataPayloadTreated.country;
+    country.value = dataPayload.country;
     var state = document.getElementById("state");
-    state.value = dataPayloadTreated.state;
+    state.value = dataPayload.state;
     var zip = document.getElementById("zip");
-    zip.value = dataPayloadTreated.zip;
+    zip.value = dataPayload.zip;
   }
 }
