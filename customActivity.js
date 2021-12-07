@@ -162,8 +162,9 @@ function treatMessageToForm(msg) {
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
       var property = dataPayloadToTreat[i];
-      console.log("property: ", property);
+
       if (property.indexOf("Event.DEAudience") >= 0) {
+        console.log("property: ", property);
         for (const j in schema) {
           let keyDE = schema[j].key;
           let nameDE = schema[j].name;
