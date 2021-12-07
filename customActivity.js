@@ -146,7 +146,7 @@ function getMessage() {
 
 function treatMessageToForm(msg) {
   var dataPayloadToTreat = msg;
-  console.log("typeof: ", typeof dataPayload);
+  console.log("typeof: ", typeof dataPayloadToTreat);
   console.log("dataPayloadToTreat_step1: ", dataPayloadToTreat);
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
