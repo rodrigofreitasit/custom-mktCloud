@@ -115,12 +115,15 @@ function requestedTriggerEventDefinition(eventDefinitionModel) {
     "requestedTriggerEventDefinition: ",
     eventDefinitionModel.eventDefinitionKey
   );
+  var eventDefinitionKey = eventDefinitionModel.eventDefinitionKey;
+  return eventDefinitionKey;
 }
 
 // Ao clicar em done é atualizado o Payload com a configuração do Objeto
 function save() {
   var bodyMessage = getMessage();
-
+  var treatMessage = treatMessage(bodyMessage.message);
+  bodyMessage.message = treatMessage;
   payload["arguments"].execute.inArguments = [bodyMessage];
 
   payload["metaData"].isConfigured = true;
@@ -163,5 +166,18 @@ function fillForm(inArguments) {
     state.value = dataPayload.state;
     var zip = document.getElementById("zip");
     zip.value = dataPayload.zip;
+  }
+}
+
+function treatMessage(msg) {
+  var message = msg;
+  if (message) {
+    for (const i in schemaDE) {
+      let keyDE = schemaDE[i].key;
+      let nameDE = schemaDE[i].name;
+      let varName = `<<${nameDE}>>`;
+      message = message.replace(varName, keyDE);
+    }
+    return message;
   }
 }
