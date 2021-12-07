@@ -122,9 +122,10 @@ function requestedTriggerEventDefinition(eventDefinitionModel) {
 // Ao clicar em done é atualizado o Payload com a configuração do Objeto
 function save() {
   var bodyMessage = getMessage();
+  var messageTreated = treatMessage(bodyMessage.message);
+  console.log("messageTreated: ", messageTreated);
+  bodyMessage.message = messageTreated;
   console.log("bodyMessage: ", bodyMessage.message);
-  // var messageTreated = treatMessage(bodyMessage[0].message);
-  // bodyMessage[0].message = messageTreated;
   payload["arguments"].execute.inArguments = [bodyMessage];
 
   payload["metaData"].isConfigured = true;
@@ -171,14 +172,14 @@ function fillForm(inArguments) {
 }
 
 function treatMessage(msg) {
-  var message = msg;
-  if (message) {
+  var messageToTreat = msg;
+  if (messageToTreat) {
     for (const i in schemaDE) {
       let keyDE = schemaDE[i].key;
       let nameDE = schemaDE[i].name;
       let varName = `<<${nameDE}>>`;
-      message = message.replace(varName, keyDE);
+      messageToTreat = messageToTreat.replace(varName, keyDE);
     }
-    return message;
+    return messageToTreat;
   }
 }
