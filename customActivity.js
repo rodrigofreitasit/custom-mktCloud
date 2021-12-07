@@ -52,7 +52,7 @@ function initActivity(data) {
   // console.log("Has In arguments: " + JSON.stringify(inArguments));
 
   if (inArguments) {
-    fillForm(inArguments);
+    fillForm(inArguments, schema);
     // treatMessageToForm(inArguments);
   }
 
@@ -157,7 +157,7 @@ function treatMessage(msg) {
   }
 }
 
-function treatMessageToForm(msg) {
+function treatMessageToForm(msg, schema) {
   var dataPayloadToTreat = msg;
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
@@ -182,9 +182,9 @@ function treatMessageToForm(msg) {
   }
 }
 
-function fillForm(inArguments) {
+function fillForm(inArguments, schema) {
   dataPayload = inArguments[0];
-  treatMessageToForm(dataPayload);
+  treatMessageToForm(dataPayload, schema);
   if (dataPayload) {
     var firstName = document.getElementById("firstName");
     firstName.value = dataPayload.firstName;
