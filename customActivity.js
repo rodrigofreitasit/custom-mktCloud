@@ -122,8 +122,9 @@ function requestedTriggerEventDefinition(eventDefinitionModel) {
 // Ao clicar em done é atualizado o Payload com a configuração do Objeto
 function save() {
   var bodyMessage = getMessage();
-  var messageTreated = treatMessage(bodyMessage[0].message);
-  bodyMessage[0].message = messageTreated;
+  console.log("bodyMessage: ", bodyMessage);
+  // var messageTreated = treatMessage(bodyMessage[0].message);
+  // bodyMessage[0].message = messageTreated;
   payload["arguments"].execute.inArguments = [bodyMessage];
 
   payload["metaData"].isConfigured = true;
