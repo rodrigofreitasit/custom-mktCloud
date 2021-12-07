@@ -152,12 +152,13 @@ function treatMessageToForm(msg) {
     for (const i in dataPayloadToTreat) {
       var property = dataPayloadToTreat[i];
       console.log("property: ", property);
-      if (property.indexOf("Event.DEAudience") >= 0) {
+      if (property.message.indexOf("Event.DEAudience") >= 0) {
         for (const j in schema) {
           let keyDE = schema[j].key;
           let nameDE = schema[j].name;
           let varName = `<<${nameDE}>>`;
-          dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
+          // dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
+          payload["message"] = payload["message"].replace(keyDE, varName);
         }
       }
     }
