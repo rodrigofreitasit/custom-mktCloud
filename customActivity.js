@@ -169,7 +169,10 @@ function treatMessageToForm(msg) {
           let keyDE = schema[j].key;
           let nameDE = schema[j].name;
           let varName = `<<${nameDE}>>`;
-          dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
+          dataPayloadToTreat[i].message = dataPayloadToTreat[i].message.replace(
+            keyDE,
+            varName
+          );
         }
       }
     }
