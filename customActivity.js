@@ -145,8 +145,8 @@ function getMessage() {
 
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
-  console.log("dataPayload: ", dataPayload);
-  let dataPayloadTreated = treatMessageToForm(dataPayload);
+  var dataPayloadTreated = treatMessageToForm(dataPayload);
+  console.log("dataPayloadTreated: ", dataPayloadTreated);
   if (dataPayloadTreated) {
     var firstName = document.getElementById("firstName");
     firstName.value = dataPayloadTreated.firstName;
@@ -182,8 +182,8 @@ function treatMessage(msg) {
   }
 }
 
-function treatMessageToForm(msg) {
-  var dataPayloadToTreat = msg;
+function treatMessageToForm(dataPayload) {
+  var dataPayloadToTreat = dataPayload;
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
       var property = dataPayloadToTreat[i];
@@ -196,7 +196,7 @@ function treatMessageToForm(msg) {
         }
       }
     }
-    console.log("dataPayloadToTreat!!: ", dataPayloadToTreat);
+    // console.log("dataPayloadToTreat!!: ", dataPayloadToTreat);
     return dataPayloadToTreat;
   }
 }
