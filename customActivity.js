@@ -146,23 +146,21 @@ function getMessage() {
 
 function treatMessageToForm(msg) {
   var dataPayloadToTreat = msg;
-  console.log("typeof: ", typeof dataPayloadToTreat);
-  console.log("dataPayloadToTreat_step1: ", dataPayloadToTreat);
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
       var property = dataPayloadToTreat[i];
-      console.log("property: ", property);
+      console.log("property: ", property.message);
       if (property.message.indexOf("Event.DEAudience") >= 0) {
         for (const j in schema) {
           let keyDE = schema[j].key;
           let nameDE = schema[j].name;
           let varName = `<<${nameDE}>>`;
           // dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
-          payload["message"] = payload["message"].replace(keyDE, varName);
+          property["message"] = property["message"].replace(keyDE, varName);
         }
       }
     }
-    console.log("dataPayloadToTreat_step2 :", dataPayloadToTreat);
+    console.log("property_step2 :", property);
     return dataPayloadToTreat;
   }
 }
