@@ -146,23 +146,25 @@ function getMessage() {
 
 function treatMessageToForm(msg) {
   var dataPayloadToTreat = msg;
-  if (dataPayloadToTreat) {
-    for (const i in dataPayloadToTreat) {
-      var property = dataPayloadToTreat[i];
-      console.log("property: ", property.message);
-      if (property.message.indexOf("Event.DEAudience") >= 0) {
-        for (const j in schema) {
-          let keyDE = schema[j].key;
-          let nameDE = schema[j].name;
-          let varName = `<<${nameDE}>>`;
-          // dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
-          property["message"] = property["message"].replace(keyDE, varName);
-        }
+
+  for (const i in dataPayloadToTreat) {
+    var property = dataPayloadToTreat[i];
+    console.log("property: ", property.message);
+    if (property.message.indexOf("Event.DEAudience") >= 0) {
+      console.log("entrou no if");
+      for (const j in schema) {
+        console.log("entrou no for");
+        let keyDE = schema[j].key;
+        let nameDE = schema[j].name;
+        let varName = `<<${nameDE}>>`;
+        // dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
+        property["message"] = property["message"].replace(keyDE, varName);
+        console.log("dentro do for", property);
       }
     }
-    console.log("property_step2 :", property);
-    return dataPayloadToTreat;
   }
+  console.log("property_step2 :", property);
+  return dataPayloadToTreat;
 }
 
 function treatMessage(msg) {
