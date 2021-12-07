@@ -52,7 +52,8 @@ function initActivity(data) {
   // console.log("Has In arguments: " + JSON.stringify(inArguments));
 
   if (inArguments) {
-    fillForm(inArguments);
+    // fillForm(inArguments);
+    treatMessageToForm(inArguments);
   }
 
   connection.trigger("updateButton", {
@@ -143,9 +144,9 @@ function getMessage() {
   return data;
 }
 
-function treatMessageToForm(dataPayload) {
-  var dataPayloadToTreat = dataPayload;
-  if (dataPayloadToTreat || typeof dataPayloadToTreat != "undefined") {
+function treatMessageToForm(msg) {
+  var dataPayloadToTreat = msg;
+  if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
       var property = dataPayloadToTreat[i];
       if (property.indexOf("Event.DEAudience") >= 0) {
@@ -157,7 +158,7 @@ function treatMessageToForm(dataPayload) {
         }
       }
     }
-    console.log("dataPayloadToTreat!!: ", dataPayloadToTreat);
+    console.log("dataPayloadToTreat :", dataPayloadToTreat);
     return dataPayloadToTreat;
   }
 }
@@ -177,8 +178,6 @@ function treatMessage(msg) {
 
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
-  var dataPayloadTreated = treatMessageToForm(dataPayload);
-  console.log("dataPayloadTreated: ", dataPayloadTreated);
   if (dataPayloadTreated) {
     var firstName = document.getElementById("firstName");
     firstName.value = dataPayloadTreated.firstName;
