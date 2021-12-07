@@ -156,16 +156,16 @@ function treatMessageToForm(msg) {
 }
 
 function updateVariables(data) {
-  // let dataObjs = data;
-  // for (var j in schema) {
-  //   console.log("entrou no for");
-  //   let keyDE = schema[j].key;
-  //   let nameDE = schema[j].name;
-  //   let varName = `<<${nameDE}>>`;
-  //   // dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
-  //   dataObjs = dataObjs.replace(keyDE, varName);
-  console.log("dentro updateVariables: ", data);
-  // }
+  let dataObjs = data;
+  for (var j in schema) {
+    console.log("entrou no for");
+    let keyDE = schema[j].key;
+    let nameDE = schema[j].name;
+    let varName = `<<${nameDE}>>`;
+    // dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
+    dataObjs.message = dataObjs.message.replace(keyDE, varName);
+  }
+  console.log("dentro updateVariables: ", dataObjs);
   // return dataObjs;
 }
 
