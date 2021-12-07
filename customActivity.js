@@ -97,6 +97,7 @@ function requestedSchema(data) {
       ul.appendChild(li);
     }
   }, 3000);
+  return schema;
 }
 
 function requestedEndpoints(endpoints) {
