@@ -157,8 +157,29 @@ function treatMessage(msg) {
   }
 }
 
+function treatMessageToForm(msg) {
+  var dataPayloadToTreat = msg;
+  if (dataPayloadToTreat) {
+    for (const i in dataPayloadToTreat) {
+      var property = dataPayloadToTreat[i];
+      console.log("property: ", property);
+      if (property.indexOf("Event.DEAudience") >= 0) {
+        for (const j in schema) {
+          let keyDE = schema[j].key;
+          let nameDE = schema[j].name;
+          let varName = `<<${nameDE}>>`;
+          dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
+        }
+      }
+    }
+    console.log("dataPayloadToTreat: ", dataPayloadToTreat);
+    return dataPayloadToTreat;
+  }
+}
+
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
+  treatMessageToForm(dataPayload);
   if (dataPayload) {
     var firstName = document.getElementById("firstName");
     firstName.value = dataPayload.firstName;
