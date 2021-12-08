@@ -164,7 +164,7 @@ function treatMessageToForm(msg) {
     return data["schema"];
   });
   var dataPayloadToTreat = msg;
-  console.log("schema2: ", schema2);
+  console.log("schema2!!!: ", schema2);
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
       var property = dataPayloadToTreat[i];
