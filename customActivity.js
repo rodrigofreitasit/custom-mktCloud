@@ -152,7 +152,7 @@ function treatMessage(msg) {
       let keyDE = schema[i].key;
       let nameDE = schema[i].name;
       let varName = `<<${nameDE}>>`;
-      messageToTreat = messageToTreat.replace(varName, keyDE);
+      messageToTreat = messageToTreat.replace(varName, `{{${keyDE}}}`);
     }
     return messageToTreat;
   }
