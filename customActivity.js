@@ -171,32 +171,29 @@ function fillForm(inArguments) {
           var keyDE = schema[index].key;
           var nameDE = schema[index].name;
           var varName = `<<${nameDE}>>`;
-          dataPayload[i] = dataPayload[i].replace(
-            keyDE,
-            varName.replace("{{", "").replace("}}", "")
-          );
+          dataPayload[i] = dataPayload[i].replace(keyDE, varName);
         }
       }
     }
     console.log("dataPayloadToTreat: ", schema);
 
     var firstName = document.getElementById("firstName");
-    firstName.value = dataPayload.firstName;
+    firstName.value = dataPayload.firstName.replace("{{", "").replace("}}", "");
     var lastName = document.getElementById("lastName");
-    lastName.value = dataPayload.lastName;
+    lastName.value = dataPayload.lastName.replace("{{", "").replace("}}", "");
     var username = document.getElementById("username");
-    username.value = dataPayload.username;
+    username.value = dataPayload.username.replace("{{", "").replace("}}", "");
     var email = document.getElementById("email");
-    email.value = dataPayload.email;
+    email.value = dataPayload.email.replace("{{", "").replace("}}", "");
     var address = document.getElementById("address");
-    address.value = dataPayload.address;
+    address.value = dataPayload.address.replace("{{", "").replace("}}", "");
     var message = document.getElementById("message");
-    message.value = dataPayload.message;
+    message.value = dataPayload.message.replace("{{", "").replace("}}", "");
     var country = document.getElementById("country");
-    country.value = dataPayload.country;
+    country.value = dataPayload.country.replace("{{", "").replace("}}", "");
     var state = document.getElementById("state");
-    state.value = dataPayload.state;
+    state.value = dataPayload.state.replace("{{", "").replace("}}", "");
     var zip = document.getElementById("zip");
-    zip.value = dataPayload.zip;
+    zip.value = dataPayload.zip.replace("{{", "").replace("}}", "");
   }
 }
