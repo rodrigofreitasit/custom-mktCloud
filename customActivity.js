@@ -54,7 +54,7 @@ function initActivity(data) {
   if (inArguments) {
     setTimeout(function () {
       fillForm(inArguments);
-    }, 1500);
+    }, 500);
   }
 
   connection.trigger("updateButton", {
