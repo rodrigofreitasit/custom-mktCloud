@@ -3,7 +3,6 @@
 var connection = new Postmonger.Session();
 var payload = {};
 var schema = {};
-var schema2 = {};
 var dataPayload = [];
 
 $(window).ready(onRender);
@@ -33,7 +32,7 @@ function onRender() {
 }
 
 function initActivity(data) {
-  console.log("initActivity: ", JSON.stringify(data));
+  // console.log("initActivity: ", JSON.stringify(data));
   if (data) {
     payload = data;
   }
@@ -57,10 +56,16 @@ function initActivity(data) {
     }, 1500);
   }
 
-  connection.trigger("updateButton", {
-    button: "next",
-    text: "done",
-    visible: true,
+  // Disable the next button if a value isn't selected
+  $("#username").change(function () {
+    var hasUsername = getMessage();
+    hasUsername = hasUsername.username;
+    connection.trigger("updateButton", {
+      button: "next",
+      text: "done",
+      visible: true,
+      enabled: Boolean(hasUsername),
+    });
   });
 }
 
@@ -128,7 +133,7 @@ function save() {
 
   payload["metaData"].isConfigured = true;
 
-  console.log("save payload: ", JSON.stringify(payload));
+  // console.log("save payload: ", JSON.stringify(payload));
   connection.trigger("updateActivity", payload);
 }
 
@@ -174,7 +179,7 @@ function fillForm(inArguments) {
         }
       }
     }
-    console.log("dataPayloadToTreat: ", schema);
+    // console.log("dataPayloadToTreat: ", schema);
 
     var firstName = document.getElementById("firstName");
     firstName.value = dataPayload.firstName
