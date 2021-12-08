@@ -113,7 +113,7 @@ function treatMessageToForm(msg) {
         }
       }
     }
-    console.log("dataPayloadToTreat: ", dataPayloadToTreat);
+    console.log("dataPayloadToTreat: ", schema2);
     return dataPayloadToTreat;
   }
 }
