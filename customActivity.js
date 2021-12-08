@@ -161,7 +161,7 @@ function treatMessage(msg) {
   }
 }
 
-$("li").on("click", function () {
+$("h6").on("click", function () {
   var cursorPos = $("#message").prop("selectionStart");
   var v = $("#message").val();
   var textBefore = v.substring(0, cursorPos);
