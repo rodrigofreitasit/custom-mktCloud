@@ -149,7 +149,6 @@ function treatMessage(msg) {
   var messageToTreat = msg;
   if (messageToTreat) {
     for (var k in messageToTreat) {
-      var propertyMessage = messageToTreat[k];
       for (const i in schema) {
         let keyDE = schema[i].key;
         let nameDE = schema[i].name;
