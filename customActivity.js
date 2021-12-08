@@ -171,14 +171,17 @@ function fillForm(inArguments) {
           var keyDE = schema[index].key;
           var nameDE = schema[index].name;
           var varName = `<<${nameDE}>>`;
-          dataPayload[i] = dataPayload[i].replace(keyDE, varName.replace("{{", "").replace("}}",""));
+          dataPayload[i] = dataPayload[i].replace(
+            keyDE,
+            varName.replace("{{", "").replace("}}", "")
+          );
         }
       }
     }
     console.log("dataPayloadToTreat: ", schema);
 
     var firstName = document.getElementById("firstName");
-    firstName.value = dataPayload.firstName.;
+    firstName.value = dataPayload.firstName;
     var lastName = document.getElementById("lastName");
     lastName.value = dataPayload.lastName;
     var username = document.getElementById("username");
