@@ -8,27 +8,14 @@ var dataPayload = [];
 $(window).ready(onRender);
 connection.on("initActivity", initActivity);
 connection.on("clickedNext", save);
-connection.on("requestedTokens", requestedTokens);
 connection.on("requestedSchema", requestedSchema);
-connection.on("requestedEndpoints", requestedEndpoints);
-connection.on("requestedInteractionDefaults", requestedInteractionDefaults);
-connection.on("requestedInteraction", requestedInteraction);
-connection.on(
-  "requestedTriggerEventDefinition",
-  requestedTriggerEventDefinition
-);
 
 function onRender() {
   // JB will respond the first time 'ready' is called with 'initActivity'
   connection.trigger("ready");
-  connection.trigger("requestTokens");
-  connection.trigger("requestEndpoints");
   // requisição dos campos da DE
   connection.trigger("nextStep");
   connection.trigger("prevStep");
-  connection.trigger("requestInteractionDefaults");
-  connection.trigger("requestInteraction");
-  connection.trigger("requestTriggerEventDefinition");
 }
 
 function initActivity(data) {
@@ -48,7 +35,8 @@ function initActivity(data) {
     ? payload["arguments"].execute.inArguments
     : {};
 
-  // console.log("Has In arguments: " + JSON.stringify(inArguments));
+  // this connection.trigger("requestSchema"); is required to function *fillForm* work fine
+  // setTimeout is used to wait for all DE fields to load
   connection.trigger("requestSchema");
   if (inArguments) {
     setTimeout(function () {
@@ -61,10 +49,6 @@ function initActivity(data) {
     text: "done",
     visible: true,
   });
-}
-
-function requestedTokens(tokens) {
-  // console.log("requestedTokens: ", tokens);
 }
 
 // Broadcast in response to a requestSchema event called by the custom application.
@@ -97,25 +81,6 @@ function requestedSchema(data) {
       ul.appendChild(li);
     }
   }, 3000);
-}
-
-function requestedEndpoints(endpoints) {
-  // console.log("endpoints: ", endpoints);
-}
-
-function requestedInteractionDefaults(settings) {
-  // console.log("requestedInteractionDefaults: ", settings);
-}
-
-function requestedInteraction(interaction) {
-  // console.log("requestedInteraction: ", interaction);
-}
-
-function requestedTriggerEventDefinition(eventDefinitionModel) {
-  // console.log(
-  //   "requestedTriggerEventDefinition: ",
-  //   eventDefinitionModel.eventDefinitionKey
-  // );
 }
 
 // Ao clicar em done é atualizado o Payload com a configuração do Objeto
