@@ -160,9 +160,8 @@ function treatMessage(msg) {
 
 function treatMessageToForm(msg) {
   connection.trigger("requestSchema");
-  connection.on("requestedSchema", function (data) {
-    // save schema
-    schema2 = data["schema"];
+  var schema2 = connection.on("requestedSchema", function (data) {
+    return data["schema"];
   });
   var dataPayloadToTreat = msg;
   console.log("schema2: ", schema2);
