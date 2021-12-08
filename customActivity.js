@@ -132,7 +132,7 @@ function save() {
 
   payload["metaData"].isConfigured = true;
 
-  console.log("save payload: ", JSON.stringify(payload));
+  // console.log("save payload: ", JSON.stringify(payload));
   connection.trigger("updateActivity", payload);
 }
 
