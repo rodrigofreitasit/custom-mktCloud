@@ -122,7 +122,6 @@ function requestedTriggerEventDefinition(eventDefinitionModel) {
 // Ao clicar em done é atualizado o Payload com a configuração do Objeto
 function save() {
   var bodyMessage = getMessage();
-  console.log("bodyMessage:  ", bodyMessage);
   var messageTreated = treatMessage(bodyMessage);
   bodyMessage = messageTreated;
   payload["arguments"].execute.inArguments = [bodyMessage];
@@ -151,7 +150,6 @@ function treatMessage(msg) {
   if (messageToTreat) {
     for (var k in messageToTreat) {
       var propertyMessage = messageToTreat[k];
-      console.log(propertyMessage);
       for (const i in schema) {
         let keyDE = schema[i].key;
         let nameDE = schema[i].name;
@@ -173,14 +171,14 @@ function fillForm(inArguments) {
           var keyDE = schema[index].key;
           var nameDE = schema[index].name;
           var varName = `<<${nameDE}>>`;
-          dataPayload[i] = dataPayload[i].replace(keyDE, varName);
+          dataPayload[i] = dataPayload[i].replace(keyDE, varName.replace("{{", "").replace("}}",""));
         }
       }
     }
     console.log("dataPayloadToTreat: ", schema);
 
     var firstName = document.getElementById("firstName");
-    firstName.value = dataPayload.firstName;
+    firstName.value = dataPayload.firstName.;
     var lastName = document.getElementById("lastName");
     lastName.value = dataPayload.lastName;
     var username = document.getElementById("username");
