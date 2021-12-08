@@ -161,14 +161,6 @@ function treatMessage(msg) {
   }
 }
 
-$("h6").on("click", function () {
-  var cursorPos = $("#message").prop("selectionStart");
-  var v = $("#message").val();
-  var textBefore = v.substring(0, cursorPos);
-  var textAfter = v.substring(cursorPos, v.length);
-  $("#message").val(textBefore + `<<${$(this).text()}>>` + textAfter);
-});
-
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
   if (dataPayload) {
