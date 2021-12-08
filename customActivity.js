@@ -52,9 +52,9 @@ function initActivity(data) {
   // console.log("Has In arguments: " + JSON.stringify(inArguments));
   connection.trigger("requestSchema");
   if (inArguments) {
-    // setTimeout(function () {
-    fillForm(inArguments);
-    // }, 500);
+    setTimeout(function () {
+      fillForm(inArguments);
+    }, 1000);
   }
 
   connection.trigger("updateButton", {
@@ -159,7 +159,6 @@ function treatMessage(msg) {
         messageToTreat[k] = messageToTreat[k].replace(varName, `{{${keyDE}}}`);
       }
     }
-
     return messageToTreat;
   }
 }
