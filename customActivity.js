@@ -149,13 +149,17 @@ function getMessage() {
 function treatMessage(msg) {
   var messageToTreat = msg;
   if (messageToTreat) {
-    for (const i in schema) {
-      let keyDE = schema[i].key;
-      let nameDE = schema[i].name;
-      let varName = `<<${nameDE}>>`;
-      messageToTreat = messageToTreat.replace(varName, `{{${keyDE}}}`);
+    for (var k in messageToTreat) {
+      var propertyMessage = messageToTreat[k];
+      console.log("propertyMessage: ", propertyMessage);
+      for (const i in schema) {
+        let keyDE = schema[i].key;
+        let nameDE = schema[i].name;
+        let varName = `<<${nameDE}>>`;
+        messageToTreat[k] = messageToTreat[k].replace(varName, `{{${keyDE}}}`);
+      }
+      return messageToTreat;
     }
-    return messageToTreat;
   }
 }
 
