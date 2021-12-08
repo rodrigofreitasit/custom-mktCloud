@@ -8,14 +8,27 @@ var dataPayload = [];
 $(window).ready(onRender);
 connection.on("initActivity", initActivity);
 connection.on("clickedNext", save);
+connection.on("requestedTokens", requestedTokens);
 connection.on("requestedSchema", requestedSchema);
+connection.on("requestedEndpoints", requestedEndpoints);
+connection.on("requestedInteractionDefaults", requestedInteractionDefaults);
+connection.on("requestedInteraction", requestedInteraction);
+connection.on(
+  "requestedTriggerEventDefinition",
+  requestedTriggerEventDefinition
+);
 
 function onRender() {
   // JB will respond the first time 'ready' is called with 'initActivity'
   connection.trigger("ready");
+  connection.trigger("requestTokens");
+  connection.trigger("requestEndpoints");
   // requisição dos campos da DE
   connection.trigger("nextStep");
   connection.trigger("prevStep");
+  connection.trigger("requestInteractionDefaults");
+  connection.trigger("requestInteraction");
+  connection.trigger("requestTriggerEventDefinition");
 }
 
 function initActivity(data) {
@@ -51,6 +64,10 @@ function initActivity(data) {
   });
 }
 
+function requestedTokens(tokens) {
+  // console.log("requestedTokens: ", tokens);
+}
+
 // Broadcast in response to a requestSchema event called by the custom application.
 function requestedSchema(data) {
   if (data.error) {
@@ -83,6 +100,25 @@ function requestedSchema(data) {
   }, 3000);
 }
 
+function requestedEndpoints(endpoints) {
+  // console.log("endpoints: ", endpoints);
+}
+
+function requestedInteractionDefaults(settings) {
+  // console.log("requestedInteractionDefaults: ", settings);
+}
+
+function requestedInteraction(interaction) {
+  // console.log("requestedInteraction: ", interaction);
+}
+
+function requestedTriggerEventDefinition(eventDefinitionModel) {
+  // console.log(
+  //   "requestedTriggerEventDefinition: ",
+  //   eventDefinitionModel.eventDefinitionKey
+  // );
+}
+
 // Ao clicar em done é atualizado o Payload com a configuração do Objeto
 function save() {
   var bodyMessage = getMessage();
@@ -92,7 +128,7 @@ function save() {
 
   payload["metaData"].isConfigured = true;
 
-  // console.log("save payload: ", JSON.stringify(payload));
+  console.log("save payload: ", JSON.stringify(payload));
   connection.trigger("updateActivity", payload);
 }
 
