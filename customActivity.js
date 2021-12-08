@@ -3,6 +3,7 @@
 var connection = new Postmonger.Session();
 var payload = {};
 var schema = {};
+var schema2 = {};
 var dataPayload = [];
 
 $(window).ready(onRender);
@@ -161,16 +162,17 @@ function treatMessageToForm(msg) {
   connection.trigger("requestSchema");
   connection.on("requestedSchema", function (data) {
     // save schema
-    console.log("*** Schema ***", JSON.stringify(data["schema"]));
+    schema2 = data["schema"];
   });
   var dataPayloadToTreat = msg;
+  console.log("schema2: ", schema2);
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
       var property = dataPayloadToTreat[i];
       if (property.indexOf("Event.DEAudience") >= 0) {
-        for (let index in schema) {
-          let keyDE = schema[index].key;
-          let nameDE = schema[index].name;
+        for (let index in schema2) {
+          let keyDE = schema2[index].key;
+          let nameDE = schema2[index].name;
           let varName = `<<${nameDE}>>`;
           dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
         }
