@@ -167,14 +167,16 @@ function treatMessage(msg) {
 }
 
 function fillForm(inArguments) {
+  connection.trigger("requestSchema");
   dataPayload = inArguments[0];
+  console.log("schema2!!: ", schema2);
   if (dataPayload) {
     for (const i in dataPayload) {
       var property = dataPayload[i];
       if (property.indexOf("Event.DEAudience") >= 0) {
-        for (var index in schema) {
-          var keyDE = schema[index].key;
-          var nameDE = schema[index].name;
+        for (var index in schema2) {
+          var keyDE = schema2[index].key;
+          var nameDE = schema2[index].name;
           var varName = `<<${nameDE}>>`;
           dataPayload[i] = dataPayload[i].replace(keyDE, varName);
         }
