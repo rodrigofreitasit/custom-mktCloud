@@ -11,7 +11,6 @@ connection.on("initActivity", initActivity);
 connection.on("clickedNext", save);
 connection.on("requestedTokens", requestedTokens);
 connection.on("requestedSchema", requestedSchema);
-connection.on("requestedSchema", requestedSchema2);
 connection.on("requestedEndpoints", requestedEndpoints);
 connection.on("requestedInteractionDefaults", requestedInteractionDefaults);
 connection.on("requestedInteraction", requestedInteraction);
@@ -26,7 +25,6 @@ function onRender() {
   connection.trigger("requestTokens");
   connection.trigger("requestEndpoints");
   // requisição dos campos da DE
-  connection.trigger("requestSchema");
   connection.trigger("nextStep");
   connection.trigger("prevStep");
   connection.trigger("requestInteractionDefaults");
@@ -52,9 +50,11 @@ function initActivity(data) {
     : {};
 
   // console.log("Has In arguments: " + JSON.stringify(inArguments));
-
+  connection.trigger("requestSchema");
   if (inArguments) {
-    fillForm(inArguments);
+    setTimeout(function () {
+      fillForm(inArguments);
+    }, 1500);
   }
 
   connection.trigger("updateButton", {
@@ -68,14 +68,6 @@ function requestedTokens(tokens) {
   // console.log("requestedTokens: ", tokens);
 }
 
-function requestedSchema2(data) {
-  if (data.error) {
-    console.error("requestedSchema Error: ", data.error);
-  } else {
-    schema2 = data["schema"];
-    console.log("schema2: ", schema2);
-  }
-}
 // Broadcast in response to a requestSchema event called by the custom application.
 function requestedSchema(data) {
   if (data.error) {
@@ -167,17 +159,14 @@ function treatMessage(msg) {
 }
 
 function fillForm(inArguments) {
-  connection.trigger("requestSchema");
-  console.log("trigger: ", connection.trigger("requestSchema"));
   dataPayload = inArguments[0];
-  console.log("schema2!!: ", data);
   if (dataPayload) {
     for (const i in dataPayload) {
       var property = dataPayload[i];
       if (property.indexOf("Event.DEAudience") >= 0) {
-        for (var index in schema2) {
-          var keyDE = schema2[index].key;
-          var nameDE = schema2[index].name;
+        for (var index in schema) {
+          var keyDE = schema[index].key;
+          var nameDE = schema[index].name;
           var varName = `<<${nameDE}>>`;
           dataPayload[i] = dataPayload[i].replace(keyDE, varName);
         }
