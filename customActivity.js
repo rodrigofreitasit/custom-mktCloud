@@ -4,10 +4,18 @@ var connection = new Postmonger.Session();
 var payload = {};
 var schema = {};
 var dataPayload = [];
+var lastStepEnabled = false;
+var steps = [
+  // initialize to the same value as what's set in config.json for consistency
+  { label: "Step 1", key: "step1" },
+  { label: "Step 2", key: "step2" },
+];
+var currentStep = steps[0].key;
 
 $(window).ready(onRender);
 connection.on("initActivity", initActivity);
-connection.on("clickedNext", save);
+connection.on("clickedNext", onClickedNext);
+connection.on("clickedBack", onClickedBack);
 connection.on("requestedTokens", requestedTokens);
 connection.on("requestedSchema", requestedSchema);
 connection.on("requestedEndpoints", requestedEndpoints);
@@ -57,9 +65,9 @@ function initActivity(data) {
   }
 
   // Disable the next button if a value isn't selected
-  $("#username").change(function () {
+  $("#campaing").change(function () {
     var hasUsername = getMessage();
-    hasUsername = hasUsername.username;
+    hasUsername = hasUsername.campaing;
     connection.trigger("updateButton", {
       button: "next",
       text: "done",
@@ -72,7 +80,6 @@ function initActivity(data) {
 function requestedTokens(tokens) {
   // console.log("requestedTokens: ", tokens);
 }
-
 // Broadcast in response to a requestSchema event called by the custom application.
 function requestedSchema(data) {
   if (data.error) {
@@ -124,6 +131,55 @@ function requestedTriggerEventDefinition(eventDefinitionModel) {
   // );
 }
 
+function onClickedNext() {
+  if (currentStep.key === "step2") {
+    save();
+  } else {
+    connection.trigger("nextStep");
+  }
+}
+function onClickedBack() {
+  connection.trigger("prevStep");
+}
+
+function onGotoStep(step) {
+  showStep(step);
+  connection.trigger("ready");
+}
+
+function showStep(step, stepIndex) {
+  if (stepIndex && !step) {
+    step = steps[stepIndex - 1];
+  }
+  currentStep = step;
+
+  $(".step").hide();
+  switch (currentStep.key) {
+    case "step1":
+      $("#step1").show();
+      connection.trigger("updateButton", {
+        button: "next",
+        enabled: Boolean(getMessage()),
+      });
+      connection.trigger("updateButton", {
+        button: "back",
+        visible: false,
+      });
+      break;
+    case "step2":
+      $("#step2").show();
+      connection.trigger("updateButton", {
+        button: "back",
+        visible: true,
+      });
+      connection.trigger("updateButton", {
+        button: "next",
+        text: "done",
+        visible: true,
+      });
+      break;
+  }
+}
 // Ao clicar em done é atualizado o Payload com a configuração do Objeto
 function save() {
   var bodyMessage = getMessage();
