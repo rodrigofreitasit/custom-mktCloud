@@ -54,7 +54,7 @@ function initActivity(data) {
 
   if (inArguments) {
     fillForm(inArguments);
-    // treatMessageToForm(inArguments);
+    console.log("schema: ", schema);
   }
 
   connection.trigger("updateButton", {
@@ -159,13 +159,7 @@ function treatMessage(msg) {
 }
 
 function treatMessageToForm(msg) {
-  connection.trigger("requestSchema");
-  var schema2 = connection.on("requestedSchema", function (data) {
-    var dataSchema = data["schema"];
-    return dataSchema;
-  });
   var dataPayloadToTreat = msg;
-  console.log("schema2!!!: ", schema2);
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
       var property = dataPayloadToTreat[i];
