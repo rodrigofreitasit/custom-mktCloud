@@ -3,6 +3,7 @@
 var connection = new Postmonger.Session();
 var payload = {};
 var schema = {};
+var schema2 = {};
 var dataPayload = [];
 
 $(window).ready(onRender);
@@ -32,7 +33,7 @@ function onRender() {
 }
 
 function initActivity(data) {
-  // console.log("initActivity: ", JSON.stringify(data));
+  console.log("initActivity: ", JSON.stringify(data));
   if (data) {
     payload = data;
   }
@@ -48,8 +49,7 @@ function initActivity(data) {
     ? payload["arguments"].execute.inArguments
     : {};
 
-  // this connection.trigger("requestSchema"); is required to function *fillForm* work fine
-  // setTimeout is used to wait for all DE fields to load
+  // console.log("Has In arguments: " + JSON.stringify(inArguments));
   connection.trigger("requestSchema");
   if (inArguments) {
     setTimeout(function () {
@@ -172,6 +172,8 @@ function fillForm(inArguments) {
         }
       }
     }
+    console.log("dataPayloadToTreat: ", schema);
+
     var firstName = document.getElementById("firstName");
     firstName.value = dataPayload.firstName;
     var lastName = document.getElementById("lastName");
