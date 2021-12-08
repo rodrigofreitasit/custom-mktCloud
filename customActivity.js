@@ -178,22 +178,34 @@ function fillForm(inArguments) {
     console.log("dataPayloadToTreat: ", schema);
 
     var firstName = document.getElementById("firstName");
-    firstName.value = dataPayload.firstName.replace("{{", "").replace("}}", "");
+    firstName.value = dataPayload.firstName
+      .replaceAll("{{", "")
+      .replaceAll("}}", "");
     var lastName = document.getElementById("lastName");
-    lastName.value = dataPayload.lastName.replace("{{", "").replace("}}", "");
+    lastName.value = dataPayload.lastName
+      .replaceAll("{{", "")
+      .replaceAll("}}", "");
     var username = document.getElementById("username");
-    username.value = dataPayload.username.replace("{{", "").replace("}}", "");
+    username.value = dataPayload.username
+      .replaceAll("{{", "")
+      .replaceAll("}}", "");
     var email = document.getElementById("email");
-    email.value = dataPayload.email.replace("{{", "").replace("}}", "");
+    email.value = dataPayload.email.replaceAll("{{", "").replaceAll("}}", "");
     var address = document.getElementById("address");
-    address.value = dataPayload.address.replace("{{", "").replace("}}", "");
+    address.value = dataPayload.address
+      .replaceAll("{{", "")
+      .replaceAll("}}", "");
     var message = document.getElementById("message");
-    message.value = dataPayload.message.replace("{{", "").replace("}}", "");
+    message.value = dataPayload.message
+      .replaceAll("{{", "")
+      .replaceAll("}}", "");
     var country = document.getElementById("country");
-    country.value = dataPayload.country.replace("{{", "").replace("}}", "");
+    country.value = dataPayload.country
+      .replaceAll("{{", "")
+      .replaceAll("}}", "");
     var state = document.getElementById("state");
-    state.value = dataPayload.state.replace("{{", "").replace("}}", "");
+    state.value = dataPayload.state.replaceAll("{{", "").replaceAll("}}", "");
     var zip = document.getElementById("zip");
-    zip.value = dataPayload.zip.replace("{{", "").replace("}}", "");
+    zip.value = dataPayload.zip.replaceAll("{{", "").replaceAll("}}", "");
   }
 }
