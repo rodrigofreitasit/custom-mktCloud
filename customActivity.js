@@ -123,8 +123,8 @@ function requestedTriggerEventDefinition(eventDefinitionModel) {
 function save() {
   var bodyMessage = getMessage();
   console.log("bodyMessage:  ", bodyMessage);
-  var messageTreated = treatMessage(bodyMessage.message);
-  bodyMessage.message = messageTreated;
+  var messageTreated = treatMessage(bodyMessage);
+  bodyMessage = messageTreated;
   payload["arguments"].execute.inArguments = [bodyMessage];
 
   payload["metaData"].isConfigured = true;
@@ -151,15 +151,16 @@ function treatMessage(msg) {
   if (messageToTreat) {
     for (var k in messageToTreat) {
       var propertyMessage = messageToTreat[k];
-      console.log("propertyMessage: ", propertyMessage);
-      for (const i in schema) {
-        let keyDE = schema[i].key;
-        let nameDE = schema[i].name;
-        let varName = `<<${nameDE}>>`;
-        messageToTreat[k] = messageToTreat[k].replace(varName, `{{${keyDE}}}`);
-      }
-      return messageToTreat;
+      console.log(propertyMessage);
     }
+
+    for (const i in schema) {
+      let keyDE = schema[i].key;
+      let nameDE = schema[i].name;
+      let varName = `<<${nameDE}>>`;
+      messageToTreat = messageToTreat.replace(varName, `{{${keyDE}}}`);
+    }
+    return messageToTreat;
   }
 }
 
