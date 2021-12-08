@@ -168,8 +168,9 @@ function treatMessage(msg) {
 
 function fillForm(inArguments) {
   connection.trigger("requestSchema");
+  console.log("trigger: ", connection.trigger("requestSchema"));
   dataPayload = inArguments[0];
-  console.log("schema2!!: ", schema2);
+  console.log("schema2!!: ", data);
   if (dataPayload) {
     for (const i in dataPayload) {
       var property = dataPayload[i];
