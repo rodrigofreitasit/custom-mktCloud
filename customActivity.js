@@ -52,9 +52,9 @@ function initActivity(data) {
   // console.log("Has In arguments: " + JSON.stringify(inArguments));
   connection.trigger("requestSchema");
   if (inArguments) {
-    setTimeout(function () {
-      fillForm(inArguments);
-    }, 500);
+    // setTimeout(function () {
+    fillForm(inArguments);
+    // }, 500);
   }
 
   connection.trigger("updateButton", {
