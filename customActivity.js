@@ -152,14 +152,14 @@ function treatMessage(msg) {
     for (var k in messageToTreat) {
       var propertyMessage = messageToTreat[k];
       console.log(propertyMessage);
+      for (const i in schema) {
+        let keyDE = schema[i].key;
+        let nameDE = schema[i].name;
+        let varName = `<<${nameDE}>>`;
+        messageToTreat[k] = messageToTreat[k].replace(varName, `{{${keyDE}}}`);
+      }
     }
 
-    for (const i in schema) {
-      let keyDE = schema[i].key;
-      let nameDE = schema[i].name;
-      let varName = `<<${nameDE}>>`;
-      messageToTreat = messageToTreat.replace(varName, `{{${keyDE}}}`);
-    }
     return messageToTreat;
   }
 }
