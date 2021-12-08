@@ -54,7 +54,6 @@ function initActivity(data) {
 
   if (inArguments) {
     fillForm(inArguments);
-    console.log("schema: ", schema);
   }
 
   connection.trigger("updateButton", {
@@ -172,13 +171,13 @@ function treatMessageToForm(msg) {
         }
       }
     }
-    console.log("dataPayloadToTreat: ", dataPayloadToTreat);
     return dataPayloadToTreat;
   }
 }
 
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
+  console.log("dataPayload: ", dataPayload);
   treatMessageToForm(dataPayload);
   if (dataPayload) {
     var firstName = document.getElementById("firstName");
