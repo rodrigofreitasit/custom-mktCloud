@@ -3,7 +3,6 @@
 var connection = new Postmonger.Session();
 var payload = {};
 var schema = {};
-var schema2 = {};
 var dataPayload = [];
 
 $(window).ready(onRender);
@@ -99,6 +98,26 @@ function requestedSchema(data) {
   }, 3000);
 }
 
+var schema2 = schema;
+function treatMessageToForm(msg) {
+  var dataPayloadToTreat = msg;
+  if (dataPayloadToTreat) {
+    for (const i in dataPayloadToTreat) {
+      var property = dataPayloadToTreat[i];
+      if (property.indexOf("Event.DEAudience") >= 0) {
+        for (var index in schema2) {
+          var keyDE = schema2[index].key;
+          var nameDE = schema2[index].name;
+          var varName = `<<${nameDE}>>`;
+          dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
+        }
+      }
+    }
+    console.log("dataPayloadToTreat: ", dataPayloadToTreat);
+    return dataPayloadToTreat;
+  }
+}
+
 function requestedEndpoints(endpoints) {
   // console.log("endpoints: ", endpoints);
 }
@@ -157,27 +176,8 @@ function treatMessage(msg) {
   }
 }
 
-function treatMessageToForm(msg) {
-  var dataPayloadToTreat = msg;
-  if (dataPayloadToTreat) {
-    for (const i in dataPayloadToTreat) {
-      var property = dataPayloadToTreat[i];
-      if (property.indexOf("Event.DEAudience") >= 0) {
-        for (let index in schema2) {
-          let keyDE = schema2[index].key;
-          let nameDE = schema2[index].name;
-          let varName = `<<${nameDE}>>`;
-          dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
-        }
-      }
-    }
-    return dataPayloadToTreat;
-  }
-}
-
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
-  console.log("dataPayload: ", dataPayload);
   treatMessageToForm(dataPayload);
   if (dataPayload) {
     var firstName = document.getElementById("firstName");
