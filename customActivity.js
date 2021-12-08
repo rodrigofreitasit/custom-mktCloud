@@ -158,6 +158,11 @@ function treatMessage(msg) {
 }
 
 function treatMessageToForm(msg) {
+  connection.trigger("requestSchema");
+  connection.on("requestedSchema", function (data) {
+    // save schema
+    console.log("*** Schema ***", JSON.stringify(data["schema"]));
+  });
   var dataPayloadToTreat = msg;
   if (dataPayloadToTreat) {
     for (const i in dataPayloadToTreat) {
