@@ -98,26 +98,6 @@ function requestedSchema(data) {
   }, 3000);
 }
 
-var schema2 = schema;
-function treatMessageToForm(msg) {
-  var dataPayloadToTreat = msg;
-  if (dataPayloadToTreat) {
-    for (const i in dataPayloadToTreat) {
-      var property = dataPayloadToTreat[i];
-      if (property.indexOf("Event.DEAudience") >= 0) {
-        for (var index in schema2) {
-          var keyDE = schema2[index].key;
-          var nameDE = schema2[index].name;
-          var varName = `<<${nameDE}>>`;
-          dataPayloadToTreat[i] = dataPayloadToTreat[i].replace(keyDE, varName);
-        }
-      }
-    }
-    console.log("dataPayloadToTreat: ", schema2);
-    return dataPayloadToTreat;
-  }
-}
-
 function requestedEndpoints(endpoints) {
   // console.log("endpoints: ", endpoints);
 }
@@ -178,8 +158,20 @@ function treatMessage(msg) {
 
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
-  treatMessageToForm(dataPayload);
   if (dataPayload) {
+    for (const i in dataPayload) {
+      var property = dataPayload[i];
+      if (property.indexOf("Event.DEAudience") >= 0) {
+        for (var index in schema) {
+          var keyDE = schema[index].key;
+          var nameDE = schema[index].name;
+          var varName = `<<${nameDE}>>`;
+          dataPayload[i] = dataPayload[i].replace(keyDE, varName);
+        }
+      }
+    }
+    console.log("dataPayloadToTreat: ", schema);
+
     var firstName = document.getElementById("firstName");
     firstName.value = dataPayload.firstName;
     var lastName = document.getElementById("lastName");
