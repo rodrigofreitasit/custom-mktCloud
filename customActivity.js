@@ -39,6 +39,15 @@ function onRender() {
   connection.trigger("requestInteractionDefaults");
   connection.trigger("requestInteraction");
   connection.trigger("requestTriggerEventDefinition");
+
+  // Disable the next button if a value isn't selected
+  $("#nameCampaign").change(function () {
+    var nameCampaign = getMessage();
+    connection.trigger("updateButton", {
+      button: "next",
+      enabled: Boolean(nameCampaign.nameCampaign),
+    });
+  });
 }
 
 function initActivity(data) {
@@ -68,7 +77,6 @@ function initActivity(data) {
 
   $("#nameCampaign").change(function () {
     var nameCampaign = getMessage();
-    console.log("nameCampaign1: ", nameCampaign);
     nameCampaign = nameCampaign.nameCampaign;
     console.log("nameCampaign2: ", nameCampaign);
     connection.trigger("updateButton", {
@@ -135,17 +143,11 @@ function requestedTriggerEventDefinition(eventDefinitionModel) {
 }
 
 function onClickedNext() {
-  console.log(
-    "currentStep.key: ",
-    currentStep.key,
-    "steps[1].active",
-    steps[1].active
-  );
   if (currentStep.key === "step2") {
-    console.log("currentStep.key: ", currentStep.key);
+    // console.log("currentStep.key: ", currentStep.key);
     save();
   } else {
-    console.log("currentStep.key: ", currentStep.key);
+    // console.log("currentStep.key: ", currentStep.key);
     connection.trigger("nextStep");
   }
 }
@@ -172,7 +174,6 @@ function showStep(step, stepIndex) {
   switch (currentStep.key) {
     case "step1":
       $("#step1").show();
-      console.log("case1");
       connection.trigger("updateButton", {
         button: "next",
         enabled: Boolean(getMessage()),
@@ -184,7 +185,6 @@ function showStep(step, stepIndex) {
       break;
     case "step2":
       $("#step2").show();
-      console.log("case2");
       connection.trigger("updateButton", {
         button: "back",
         visible: true,
@@ -256,6 +256,11 @@ function fillForm(inArguments) {
       }
     }
     // console.log("dataPayloadToTreat: ", schema);
+    var nameCampaign = document.getElementById("nameCampaign");
+    nameCampaign.value = dataPayload.nameCampaign;
+
+    var nameProduct = document.getElementById("nameProduct");
+    nameProduct.value = dataPayload.nameProduct;
 
     var firstName = document.getElementById("firstName");
     firstName.value = dataPayload.firstName
