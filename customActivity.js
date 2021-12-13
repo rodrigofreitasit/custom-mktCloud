@@ -42,10 +42,13 @@ function onRender() {
 
   // Disable the next button if a value isn't selected
   $("#nameCampaign").change(function () {
-    var nameCampaign = getMessage();
+    var hasNameCampaign = getMessage();
+    hasNameCampaign = hasNameCampaign.nameCampaign;
     connection.trigger("updateButton", {
       button: "next",
-      enabled: Boolean(nameCampaign.nameCampaign),
+      text: "done",
+      visible: true,
+      enabled: Boolean(hasNameCampaign),
     });
   });
 }
