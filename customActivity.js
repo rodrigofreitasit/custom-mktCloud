@@ -44,6 +44,7 @@ function onRender() {
   $("#nameCampaign").change(function () {
     var hasNameCampaign = getMessage();
     hasNameCampaign = hasNameCampaign.nameCampaign;
+    console.log("hasNameCampaign", Boolean(hasNameCampaign));
     connection.trigger("updateButton", {
       button: "next",
       text: "done",
@@ -216,7 +217,7 @@ function save() {
 }
 
 function getMessage() {
-  console.log("entrou no getMessage");
+  // console.log("entrou no getMessage");
   var obj = [];
   var inputs = document.querySelectorAll("input,textarea,select");
   var arr = Array.from(inputs);
