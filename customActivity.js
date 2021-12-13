@@ -41,17 +41,7 @@ function onRender() {
   connection.trigger("requestTriggerEventDefinition");
 
   // Disable the next button if a value isn't selected
-  $("#nameCampaign").change(function () {
-    var hasNameCampaign = getMessage();
-    hasNameCampaign = hasNameCampaign.nameCampaign;
-    console.log("hasNameCampaign", Boolean(hasNameCampaign));
-    connection.trigger("updateButton", {
-      button: "next",
-      text: "done",
-      visible: true,
-      enabled: Boolean(hasNameCampaign),
-    });
-  });
+  validateField();
 }
 
 function initActivity(data) {
@@ -76,18 +66,18 @@ function initActivity(data) {
   if (inArguments) {
     setTimeout(function () {
       fillForm(inArguments);
+      validateField();
     }, 1500);
   }
+}
 
-  $("#nameCampaign").change(function () {
-    var nameCampaign = getMessage();
-    nameCampaign = nameCampaign.nameCampaign;
-    console.log("nameCampaign2: ", nameCampaign);
-    connection.trigger("updateButton", {
-      button: "next",
-      text: "next",
-      enabled: Boolean(nameCampaign),
-    });
+function validateField() {
+  var hasNameCampaign = getMessage();
+  hasNameCampaign = hasNameCampaign.nameCampaign;
+  connection.trigger("updateButton", {
+    button: "next",
+    text: "next",
+    enabled: Boolean(hasNameCampaign),
   });
 }
 
@@ -178,8 +168,7 @@ function showStep(step, stepIndex) {
   switch (currentStep.key) {
     case "step1":
       $("#step1").show();
-      var hasNameCampaignSteps = getMessage();
-      hasNameCampaignSteps = hasNameCampaignSteps.nameCampaign;
+      var hasNameCampaignSteps = validateField();
       connection.trigger("updateButton", {
         button: "next",
         enabled: Boolean(hasNameCampaignSteps),
