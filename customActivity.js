@@ -135,10 +135,12 @@ function requestedTriggerEventDefinition(eventDefinitionModel) {
 }
 
 function onClickedNext() {
+  console.log("currentStep.key: ", currentStep.key);
   if (currentStep.key === "step2" && steps[1].active === false) {
     console.log("currentStep.key: ", currentStep.key);
     save();
   } else {
+    console.log("currentStep.key: ", currentStep.key);
     connection.trigger("nextStep");
   }
 }
