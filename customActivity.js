@@ -178,9 +178,11 @@ function showStep(step, stepIndex) {
   switch (currentStep.key) {
     case "step1":
       $("#step1").show();
+      var hasNameCampaignSteps = getMessage();
+      hasNameCampaignSteps = hasNameCampaignSteps.nameCampaign;
       connection.trigger("updateButton", {
         button: "next",
-        enabled: Boolean(getMessage()),
+        enabled: Boolean(hasNameCampaignSteps),
       });
       connection.trigger("updateButton", {
         button: "back",
