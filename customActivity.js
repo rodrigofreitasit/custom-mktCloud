@@ -74,11 +74,23 @@ function initActivity(data) {
 function validateField() {
   var hasNameCampaign = getMessage();
   hasNameCampaign = hasNameCampaign.nameCampaign;
-  connection.trigger("updateButton", {
-    button: "next",
-    text: "next",
-    enabled: Boolean(hasNameCampaign),
-  });
+  if (hasNameCampaign) {
+    connection.trigger("updateButton", {
+      button: "next",
+      text: "next",
+      enabled: Boolean(hasNameCampaign),
+    });
+  } else {
+    $("#nameCampaign").change(function () {
+      hasNameCampaign = getMessage();
+      hasNameCampaign = hasNameCampaign.nameCampaign;
+      connection.trigger("updateButton", {
+        button: "next",
+        text: "next",
+        enabled: Boolean(hasNameCampaign),
+      });
+    });
+  }
 }
 
 function requestedTokens(tokens) {
