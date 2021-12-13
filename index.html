@@ -8,8 +8,14 @@
       content="no-cache, no-store, must-revalidate"
     />
     <meta http-equiv="Access-Control-Allow-Origin" content="*" />
-    <title>Custom Journey Builder Activity</title>
+    <title>Custom Journey Builder Activity 1</title>
     <style>
+      .step {
+        display: none;
+      }
+      #step1 {
+        display: block;
+      }
       .container {
         max-width: 900px;
         margin-top: 20px;
@@ -50,7 +56,24 @@
   <body class="bg-light">
     <div class="container">
       <main>
-        <div class="row g-5">
+        <!-- STEP1 -->
+        <div id="step1" class="row g-5 step">
+          <div class="col-md-7 col-lg-8">
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="nameCampaign" class="form-label">Campanha</label>
+                <input type="text" class="form-control" id="nameCampaign" />
+              </div>
+
+              <div class="col-12">
+                <label for="nameProduct" class="form-label">Produto</label>
+                <input type="text" class="form-control" id="nameProduct" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- STEP2 -->
+        <div id="step2" class="row g-5 step">
           <div class="col-md-7 col-lg-8 order-md-last">
             <div class="row g-3">
               <div class="col-sm-6">

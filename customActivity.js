@@ -4,10 +4,16 @@ var connection = new Postmonger.Session();
 var payload = {};
 var schema = {};
 var dataPayload = [];
+var steps = [
+  // initialize to the same value as what's set in config.json for consistency
+  { label: "Step 1", key: "step1" },
+  { label: "Step 2", key: "step2" },
+];
+var currentStep = steps[0].key;
 
 $(window).ready(onRender);
 connection.on("initActivity", initActivity);
-connection.on("clickedNext", save);
+// connection.on("clickedNext", save);
 connection.on("requestedTokens", requestedTokens);
 connection.on("requestedSchema", requestedSchema);
 connection.on("requestedEndpoints", requestedEndpoints);
@@ -17,6 +23,10 @@ connection.on(
   "requestedTriggerEventDefinition",
   requestedTriggerEventDefinition
 );
+
+connection.on("clickedNext", onClickedNext);
+connection.on("clickedBack", onClickedBack);
+connection.on("gotoStep", onGotoStep);
 
 function onRender() {
   // JB will respond the first time 'ready' is called with 'initActivity'
@@ -56,14 +66,15 @@ function initActivity(data) {
     }, 1500);
   }
 
-  $("#username").change(function () {
-    var hasUsername = getMessage();
-    hasUsername = hasUsername.username;
+  $("#nameCampaign").change(function () {
+    var nameCampaign = getMessage();
+    console.log("nameCampaign1: ", nameCampaign);
+    nameCampaign = nameCampaign.nameCampaign;
+    console.log("nameCampaign2: ", nameCampaign);
     connection.trigger("updateButton", {
       button: "next",
-      text: "done",
-      visible: true,
-      enabled: Boolean(hasUsername),
+      text: "next",
+      enabled: Boolean(nameCampaign),
     });
   });
 }
@@ -123,8 +134,66 @@ function requestedTriggerEventDefinition(eventDefinitionModel) {
   // );
 }
 
+function onClickedNext() {
+  if (currentStep.key === "step2" && steps[1].active === false) {
+    console.log("currentStep.key: ", currentStep.key);
+    save();
+  } else {
+    connection.trigger("nextStep");
+  }
+}
+
+function onClickedBack() {
+  connection.trigger("prevStep");
+}
+
+function onGotoStep(step) {
+  console.log("step: ", step);
+  showStep(step);
+  connection.trigger("ready");
+}
+
+function showStep(step, stepIndex) {
+  if (stepIndex && !step) {
+    step = steps[stepIndex - 1];
+  }
+
+  currentStep = step;
+
+  $(".step").hide();
+
+  switch (currentStep.key) {
+    case "step1":
+      $("#step1").show();
+      console.log("case1");
+      connection.trigger("updateButton", {
+        button: "next",
+        enabled: Boolean(getMessage()),
+      });
+      connection.trigger("updateButton", {
+        button: "back",
+        visible: false,
+      });
+      break;
+    case "step2":
+      $("#step2").show();
+      console.log("case2");
+      connection.trigger("updateButton", {
+        button: "back",
+        visible: true,
+      });
+      connection.trigger("updateButton", {
+        button: "next",
+        text: "done",
+        visible: true,
+      });
+      break;
+  }
+}
+
 // Ao clicar em done é atualizado o Payload com a configuração do Objeto
 function save() {
+  console.log("entrou no save");
   var bodyMessage = getMessage();
   var messageTreated = treatMessage(bodyMessage);
   bodyMessage = messageTreated;
@@ -137,6 +206,7 @@ function save() {
 }
 
 function getMessage() {
+  console.log("entrou no getMessage");
   var obj = [];
   var inputs = document.querySelectorAll("input,textarea,select");
   var arr = Array.from(inputs);
