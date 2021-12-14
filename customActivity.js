@@ -251,7 +251,10 @@ function fillForm(inArguments) {
   if (dataPayload) {
     for (const i in dataPayload) {
       var property = dataPayload[i];
-      if (property.indexOf("Event.DEAudience") >= 0) {
+      if (
+        property.indexOf("Event.DEAudience") >= 0 ||
+        property.indexOf("Event.APIEvent") >= 0
+      ) {
         for (var index in schema) {
           var keyDE = schema[index].key;
           var nameDE = schema[index].name;
