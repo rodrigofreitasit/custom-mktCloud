@@ -163,7 +163,7 @@ function onClickedBack() {
 }
 
 function onGotoStep(step) {
-  console.log("step: ", step);
+  // console.log("step: ", step);
   showStep(step);
   connection.trigger("ready");
 }
@@ -181,6 +181,7 @@ function showStep(step, stepIndex) {
     case "step1":
       $("#step1").show();
       var hasNameCampaignSteps = validateField();
+      console.log("entrou: ", hasNameCampaignSteps);
       connection.trigger("updateButton", {
         button: "next",
         enabled: Boolean(hasNameCampaignSteps),
