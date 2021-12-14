@@ -211,6 +211,7 @@ function save() {
   var bodyMessage = getMessage();
   var messageTreated = treatMessage(bodyMessage);
   bodyMessage = messageTreated;
+  console.log(bodyMessage);
   payload["arguments"].execute.inArguments = [bodyMessage];
 
   payload["metaData"].isConfigured = true;
