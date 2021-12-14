@@ -13,17 +13,7 @@ var currentStep = steps[0].key;
 
 $(window).ready(onRender);
 connection.on("initActivity", initActivity);
-// connection.on("clickedNext", save);
-connection.on("requestedTokens", requestedTokens);
 connection.on("requestedSchema", requestedSchema);
-connection.on("requestedEndpoints", requestedEndpoints);
-connection.on("requestedInteractionDefaults", requestedInteractionDefaults);
-connection.on("requestedInteraction", requestedInteraction);
-connection.on(
-  "requestedTriggerEventDefinition",
-  requestedTriggerEventDefinition
-);
-
 connection.on("clickedNext", onClickedNext);
 connection.on("clickedBack", onClickedBack);
 connection.on("gotoStep", onGotoStep);
@@ -33,13 +23,8 @@ function onRender() {
   connection.trigger("ready");
   connection.trigger("requestTokens");
   connection.trigger("requestEndpoints");
-  // requisição dos campos da DE
   connection.trigger("nextStep");
   connection.trigger("prevStep");
-  connection.trigger("requestInteractionDefaults");
-  connection.trigger("requestInteraction");
-  connection.trigger("requestTriggerEventDefinition");
-
   // Disable the next button if a value isn't selected
   validateField();
 }
@@ -70,7 +55,6 @@ function initActivity(data) {
     }, 1500);
   }
 }
-
 function validateField() {
   var hasNameCampaign = getMessage();
   hasNameCampaign = hasNameCampaign.nameCampaign;
@@ -92,11 +76,6 @@ function validateField() {
     });
   }
 }
-
-function requestedTokens(tokens) {
-  // console.log("requestedTokens: ", tokens);
-}
-
 // Broadcast in response to a requestSchema event called by the custom application.
 function requestedSchema(data) {
   if (data.error) {
@@ -128,26 +107,6 @@ function requestedSchema(data) {
     }
   }, 3000);
 }
-
-function requestedEndpoints(endpoints) {
-  // console.log("endpoints: ", endpoints);
-}
-
-function requestedInteractionDefaults(settings) {
-  // console.log("requestedInteractionDefaults: ", settings);
-}
-
-function requestedInteraction(interaction) {
-  // console.log("requestedInteraction: ", interaction);
-}
-
-function requestedTriggerEventDefinition(eventDefinitionModel) {
-  // console.log(
-  //   "requestedTriggerEventDefinition: ",
-  //   eventDefinitionModel.eventDefinitionKey
-  // );
-}
-
 function onClickedNext() {
   if (currentStep.key === "step2") {
     // console.log("currentStep.key: ", currentStep.key);
@@ -157,17 +116,14 @@ function onClickedNext() {
     connection.trigger("nextStep");
   }
 }
-
 function onClickedBack() {
   connection.trigger("prevStep");
 }
-
 function onGotoStep(step) {
   // console.log("step: ", step);
   showStep(step);
   connection.trigger("ready");
 }
-
 function showStep(step, stepIndex) {
   if (stepIndex && !step) {
     step = steps[stepIndex - 1];
@@ -205,7 +161,6 @@ function showStep(step, stepIndex) {
       break;
   }
 }
-
 // Ao clicar em done é atualizado o Payload com a configuração do Objeto
 function save() {
   var bodyMessage = getMessage();
@@ -218,7 +173,6 @@ function save() {
 
   connection.trigger("updateActivity", payload);
 }
-
 function getMessage() {
   var obj = [];
   var inputs = document.querySelectorAll("input,textarea,select");
@@ -231,7 +185,6 @@ function getMessage() {
   let data = obj.reduce((acc, cur) => ({ ...acc, [cur.id]: cur.value }), {});
   return data;
 }
-
 function treatMessage(msg) {
   var messageToTreat = msg;
   if (messageToTreat) {
@@ -246,7 +199,6 @@ function treatMessage(msg) {
     return messageToTreat;
   }
 }
-
 function fillForm(inArguments) {
   dataPayload = inArguments[0];
   if (dataPayload) {
