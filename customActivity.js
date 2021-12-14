@@ -21,8 +21,6 @@ connection.on("gotoStep", onGotoStep);
 function onRender() {
   // JB will respond the first time 'ready' is called with 'initActivity'
   connection.trigger("ready");
-  connection.trigger("requestTokens");
-  connection.trigger("requestEndpoints");
   connection.trigger("nextStep");
   connection.trigger("prevStep");
   // Disable the next button if a value isn't selected
