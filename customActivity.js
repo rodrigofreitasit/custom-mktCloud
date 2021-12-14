@@ -180,7 +180,8 @@ function showStep(step, stepIndex) {
   switch (currentStep.key) {
     case "step1":
       $("#step1").show();
-      var hasNameCampaignSteps = validateField();
+      var hasNameCampaignSteps = getMessage();
+      hasNameCampaignSteps = hasNameCampaignSteps.nameCampaign;
       console.log("entrou: ", hasNameCampaignSteps);
       connection.trigger("updateButton", {
         button: "next",
