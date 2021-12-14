@@ -182,7 +182,6 @@ function showStep(step, stepIndex) {
       $("#step1").show();
       var hasNameCampaignSteps = getMessage();
       hasNameCampaignSteps = hasNameCampaignSteps.nameCampaign;
-      console.log("entrou: ", hasNameCampaignSteps);
       connection.trigger("updateButton", {
         button: "next",
         enabled: Boolean(hasNameCampaignSteps),
@@ -209,7 +208,6 @@ function showStep(step, stepIndex) {
 
 // Ao clicar em done é atualizado o Payload com a configuração do Objeto
 function save() {
-  console.log("entrou no save");
   var bodyMessage = getMessage();
   var messageTreated = treatMessage(bodyMessage);
   bodyMessage = messageTreated;
@@ -217,12 +215,10 @@ function save() {
 
   payload["metaData"].isConfigured = true;
 
-  // console.log("save payload: ", JSON.stringify(payload));
   connection.trigger("updateActivity", payload);
 }
 
 function getMessage() {
-  // console.log("entrou no getMessage");
   var obj = [];
   var inputs = document.querySelectorAll("input,textarea,select");
   var arr = Array.from(inputs);
