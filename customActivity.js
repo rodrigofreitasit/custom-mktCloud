@@ -77,6 +77,21 @@ function initActivity(data) {
     }, 1500);
   }
 }
+
+function copyToClipboard(text) {
+  var sampleTextarea = document.createElement("textarea");
+  document.body.appendChild(sampleTextarea);
+  sampleTextarea.value = text; //save main text in it
+  sampleTextarea.select(); //select textarea contenrs
+  document.execCommand("copy");
+  document.body.removeChild(sampleTextarea);
+}
+
+function textToCopy(data) {
+  var copyText = data.textContent;
+  copyToClipboard(copyText);
+}
+
 // Broadcast in response to a requestSchema event called by the custom application.
 function requestedSchema(data) {
   if (data.error) {
@@ -101,6 +116,7 @@ function requestedSchema(data) {
       );
       h6.classList.add("my-0");
       h6.setAttribute("id", schema[i].name);
+      h6.setAttribute("onclick", "textToCopy(this)");
       h6.appendChild(text);
       div.appendChild(h6);
       li.appendChild(div);
