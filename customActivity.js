@@ -74,7 +74,7 @@ function initActivity(data) {
   if (inArguments) {
     setTimeout(function () {
       fillForm(inArguments);
-    }, 1000);
+    }, 1500);
   }
 }
 // Broadcast in response to a requestSchema event called by the custom application.
@@ -100,6 +100,7 @@ function requestedSchema(data) {
         "lh-sm"
       );
       h6.classList.add("my-0");
+      h6.setAttribute("id", schema[i].name);
       h6.appendChild(text);
       div.appendChild(h6);
       li.appendChild(div);
