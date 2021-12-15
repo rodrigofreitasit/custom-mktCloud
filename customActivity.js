@@ -209,14 +209,17 @@ function fillForm(inArguments) {
           var varName = `<<${nameDE}>>`;
           dataPayload[i] = dataPayload[i]
             .replace(keyDE, varName)
-            .replace(/[{{}}]/g, "");
+            .replaceAll("{{", "")
+            .replaceAll("}}", "");
         }
       }
     }
     var nameCampaign = document.getElementById("nameCampaign");
     nameCampaign.value = dataPayload.nameCampaign;
+
     var nameProduct = document.getElementById("nameProduct");
     nameProduct.value = dataPayload.nameProduct;
+
     var firstName = document.getElementById("firstName");
     firstName.value = dataPayload.firstName;
     var lastName = document.getElementById("lastName");
