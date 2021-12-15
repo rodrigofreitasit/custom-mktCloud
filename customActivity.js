@@ -239,8 +239,7 @@ function fillForm(inArguments) {
           var varName = `<<${nameDE}>>`;
           dataPayload[i] = dataPayload[i]
             .replace(keyDE, varName)
-            .replaceAll("{{", "")
-            .replaceAll("}}", "");
+            .replace(/\{{(.+?)\}}/gi, `$1`);
         }
       }
     }
