@@ -25,7 +25,6 @@ function onRender() {
   connection.trigger("nextStep");
   connection.trigger("prevStep");
   // Disable the next button if a value isn't selected
-  // Disable the next button if a value isn't selected
   $("#nameCampaign").change(function () {
     hasNameCampaign = getMessage();
     hasNameCampaign = hasNameCampaign.nameCampaign;
@@ -35,11 +34,9 @@ function onRender() {
       enabled: Boolean(hasNameCampaign),
     });
   });
-  // validateField();
 }
 
 function initActivity(data) {
-  // console.log("initActivity: ", JSON.stringify(data));
   if (data) {
     payload = data;
   }
@@ -73,7 +70,6 @@ function initActivity(data) {
     showStep(null, 2);
   }
 
-  // console.log("Has In arguments: " + JSON.stringify(inArguments));
   connection.trigger("requestSchema");
   if (inArguments) {
     setTimeout(function () {
@@ -81,27 +77,6 @@ function initActivity(data) {
     }, 1500);
   }
 }
-// function validateField() {
-//   hasNameCampaign = getMessage();
-//   hasNameCampaign = hasNameCampaign.nameCampaign;
-//   // if (hasNameCampaign) {
-//   //   connection.trigger("updateButton", {
-//   //     button: "next",
-//   //     text: "next",
-//   //     enabled: Boolean(hasNameCampaign),
-//   //   });
-//   // } else {
-//   $("#nameCampaign").change(function () {
-//     hasNameCampaign = getMessage();
-//     hasNameCampaign = hasNameCampaign.nameCampaign;
-//     connection.trigger("updateButton", {
-//       button: "next",
-//       text: "next",
-//       enabled: Boolean(hasNameCampaign),
-//     });
-//   });
-//   // }
-// }
 // Broadcast in response to a requestSchema event called by the custom application.
 function requestedSchema(data) {
   if (data.error) {
@@ -109,7 +84,6 @@ function requestedSchema(data) {
   } else {
     schema = data["schema"];
   }
-  // console.log("requestedSchema: ", schema);
   var ul = document.getElementById("ul-variable");
   var spinner = document.getElementById("spinner");
   setTimeout(function () {
@@ -135,10 +109,8 @@ function requestedSchema(data) {
 }
 function onClickedNext() {
   if (currentStep.key === "step2") {
-    // console.log("currentStep.key: ", currentStep.key);
     save();
   } else {
-    // console.log("currentStep.key: ", currentStep.key);
     connection.trigger("nextStep");
   }
 }
@@ -146,7 +118,6 @@ function onClickedBack() {
   connection.trigger("prevStep");
 }
 function onGotoStep(step) {
-  // console.log("step: ", step);
   showStep(step);
   connection.trigger("ready");
 }
@@ -191,7 +162,6 @@ function save() {
   var bodyMessage = getMessage();
   var messageTreated = treatMessage(bodyMessage);
   bodyMessage = messageTreated;
-  console.log("bodyMessage: ", JSON.stringify(bodyMessage));
   payload["arguments"].execute.inArguments = [bodyMessage];
 
   payload["metaData"].isConfigured = true;
@@ -238,10 +208,10 @@ function fillForm(inArguments) {
           var nameDE = schema[index].name;
           var varName = `<<${nameDE}>>`;
           dataPayload[i] = dataPayload[i].replace(keyDE, varName);
+          console.log("i: ", dataPayload[i]);
         }
       }
     }
-    // console.log("dataPayloadToTreat: ", schema);
     var nameCampaign = document.getElementById("nameCampaign");
     nameCampaign.value = dataPayload.nameCampaign;
 
