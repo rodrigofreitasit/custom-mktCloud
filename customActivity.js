@@ -88,7 +88,7 @@ function copyToClipboard(text) {
 }
 
 function textToCopy(data) {
-  var copyText = data.textContent;
+  var copyText = `<<${data.textContent}>>`;
   copyToClipboard(copyText);
 }
 
@@ -117,6 +117,7 @@ function requestedSchema(data) {
       h6.classList.add("my-0");
       h6.setAttribute("id", schema[i].name);
       h6.setAttribute("onclick", "textToCopy(this)");
+      h6.style.cursor = "pointer";
       h6.appendChild(text);
       div.appendChild(h6);
       li.appendChild(div);
