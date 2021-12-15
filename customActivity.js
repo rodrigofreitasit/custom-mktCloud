@@ -164,6 +164,7 @@ function showStep(step, stepIndex) {
       $("#step1").show();
       connection.trigger("updateButton", {
         button: "next",
+        text: "next",
         enabled: Boolean(hasNameCampaign),
       });
       connection.trigger("updateButton", {
