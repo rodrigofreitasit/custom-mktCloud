@@ -88,8 +88,20 @@ function copyToClipboard(text) {
 }
 
 function textToCopy(data) {
-  var copyText = `<<${data.textContent}>>`;
   copyToClipboard(copyText);
+  var txtarea = document.getElementById("message");
+  var copyText = `<<${data.textContent}>>`;
+  var start = txtarea.selectionStart;
+  var end = txtarea.selectionEnd;
+  var sel = txtarea.value.substring(start, end);
+  var finText =
+    txtarea.value.substring(0, start) +
+    copyText +
+    sel +
+    txtarea.value.substring(end);
+  txtarea.value = finText;
+  txtarea.focus();
+  txtarea.selectionEnd = end + 7;
 }
 
 // Broadcast in response to a requestSchema event called by the custom application.
