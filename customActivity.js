@@ -207,8 +207,11 @@ function fillForm(inArguments) {
           var keyDE = schema[index].key;
           var nameDE = schema[index].name;
           var varName = `<<${nameDE}>>`;
-          dataPayload[i] = dataPayload[i].replace(keyDE, varName);
-          console.log("i: ", dataPayload[i]);
+          dataPayload[i] = dataPayload[i]
+            .replace(keyDE, varName)
+            .replaceAll("{{", "")
+            .replaceAll("}}", "");
+          console.log(`i: ${i}`, dataPayload[i]);
         }
       }
     }
@@ -219,34 +222,22 @@ function fillForm(inArguments) {
     nameProduct.value = dataPayload.nameProduct;
 
     var firstName = document.getElementById("firstName");
-    firstName.value = dataPayload.firstName
-      .replaceAll("{{", "")
-      .replaceAll("}}", "");
+    firstName.value = dataPayload.firstName;
     var lastName = document.getElementById("lastName");
-    lastName.value = dataPayload.lastName
-      .replaceAll("{{", "")
-      .replaceAll("}}", "");
+    lastName.value = dataPayload.lastName;
     var username = document.getElementById("username");
-    username.value = dataPayload.username
-      .replaceAll("{{", "")
-      .replaceAll("}}", "");
+    username.value = dataPayload.username;
     var email = document.getElementById("email");
-    email.value = dataPayload.email.replaceAll("{{", "").replaceAll("}}", "");
+    email.value = dataPayload.email;
     var address = document.getElementById("address");
-    address.value = dataPayload.address
-      .replaceAll("{{", "")
-      .replaceAll("}}", "");
+    address.value = dataPayload.address;
     var message = document.getElementById("message");
-    message.value = dataPayload.message
-      .replaceAll("{{", "")
-      .replaceAll("}}", "");
+    message.value = dataPayload.message;
     var country = document.getElementById("country");
-    country.value = dataPayload.country
-      .replaceAll("{{", "")
-      .replaceAll("}}", "");
+    country.value = dataPayload.country;
     var state = document.getElementById("state");
-    state.value = dataPayload.state.replaceAll("{{", "").replaceAll("}}", "");
+    state.value = dataPayload.state;
     var zip = document.getElementById("zip");
-    zip.value = dataPayload.zip.replaceAll("{{", "").replaceAll("}}", "");
+    zip.value = dataPayload.zip;
   }
 }
