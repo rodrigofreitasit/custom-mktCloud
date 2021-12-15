@@ -58,10 +58,20 @@ function initActivity(data) {
   $.each(inArguments, function (index, inArgument) {
     $.each(inArgument, function (key, val) {
       if (key === "nameCampaign") {
-        console.log("each: ", val);
+        hasNameCampaign = val;
       }
     });
   });
+
+  // If there is no message selected, disable the next button
+  if (!hasNameCampaign) {
+    showStep(null, 1);
+    connection.trigger("updateButton", { button: "next", enabled: false });
+    // If there is a message, skip to the summary step
+  } else {
+    $("#nameCampaign").attr("value");
+    showStep(null, 2);
+  }
 
   // console.log("Has In arguments: " + JSON.stringify(inArguments));
   connection.trigger("requestSchema");
