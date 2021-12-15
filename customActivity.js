@@ -74,7 +74,7 @@ function initActivity(data) {
   if (inArguments) {
     setTimeout(function () {
       fillForm(inArguments);
-    }, 1500);
+    }, 1000);
   }
 }
 // Broadcast in response to a requestSchema event called by the custom application.
@@ -210,16 +210,13 @@ function fillForm(inArguments) {
           dataPayload[i] = dataPayload[i]
             .replace(keyDE, varName)
             .replace(/[{{}}]/g, "");
-          console.log(`i: ${i}`, dataPayload[i]);
         }
       }
     }
     var nameCampaign = document.getElementById("nameCampaign");
     nameCampaign.value = dataPayload.nameCampaign;
-
     var nameProduct = document.getElementById("nameProduct");
     nameProduct.value = dataPayload.nameProduct;
-
     var firstName = document.getElementById("firstName");
     firstName.value = dataPayload.firstName;
     var lastName = document.getElementById("lastName");
