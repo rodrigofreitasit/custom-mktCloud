@@ -101,7 +101,7 @@ function textToCopy(data) {
     txtarea.value.substring(end);
   txtarea.value = finText;
   txtarea.focus();
-  txtarea.selectionEnd = end + 7;
+  txtarea.selectionEnd = end;
 }
 
 // Broadcast in response to a requestSchema event called by the custom application.
