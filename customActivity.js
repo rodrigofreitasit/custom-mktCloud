@@ -10,6 +10,7 @@ var steps = [
   { label: "Step 2", key: "step2" },
 ];
 var currentStep = steps[0].key;
+var hasNameCampaign = null;
 
 $(window).ready(onRender);
 connection.on("initActivity", initActivity);
@@ -24,7 +25,17 @@ function onRender() {
   connection.trigger("nextStep");
   connection.trigger("prevStep");
   // Disable the next button if a value isn't selected
-  validateField();
+  // Disable the next button if a value isn't selected
+  $("#nameCampaign").change(function () {
+    hasNameCampaign = getMessage();
+    hasNameCampaign = hasNameCampaign.nameCampaign;
+    connection.trigger("updateButton", {
+      button: "next",
+      text: "next",
+      enabled: Boolean(hasNameCampaign),
+    });
+  });
+  // validateField();
 }
 
 function initActivity(data) {
@@ -44,36 +55,43 @@ function initActivity(data) {
     ? payload["arguments"].execute.inArguments
     : {};
 
+  $.each(inArguments, function (index, inArgument) {
+    $.each(inArgument, function (key, val) {
+      if (key === "nameCampaign") {
+        console.log("each: ", val);
+      }
+    });
+  });
+
   // console.log("Has In arguments: " + JSON.stringify(inArguments));
   connection.trigger("requestSchema");
   if (inArguments) {
     setTimeout(function () {
       fillForm(inArguments);
-      validateField();
     }, 1500);
   }
 }
-function validateField() {
-  var hasNameCampaign = getMessage();
-  hasNameCampaign = hasNameCampaign.nameCampaign;
-  if (hasNameCampaign) {
-    connection.trigger("updateButton", {
-      button: "next",
-      text: "next",
-      enabled: Boolean(hasNameCampaign),
-    });
-  } else {
-    $("#nameCampaign").change(function () {
-      hasNameCampaign = getMessage();
-      hasNameCampaign = hasNameCampaign.nameCampaign;
-      connection.trigger("updateButton", {
-        button: "next",
-        text: "next",
-        enabled: Boolean(hasNameCampaign),
-      });
-    });
-  }
-}
+// function validateField() {
+//   hasNameCampaign = getMessage();
+//   hasNameCampaign = hasNameCampaign.nameCampaign;
+//   // if (hasNameCampaign) {
+//   //   connection.trigger("updateButton", {
+//   //     button: "next",
+//   //     text: "next",
+//   //     enabled: Boolean(hasNameCampaign),
+//   //   });
+//   // } else {
+//   $("#nameCampaign").change(function () {
+//     hasNameCampaign = getMessage();
+//     hasNameCampaign = hasNameCampaign.nameCampaign;
+//     connection.trigger("updateButton", {
+//       button: "next",
+//       text: "next",
+//       enabled: Boolean(hasNameCampaign),
+//     });
+//   });
+//   // }
+// }
 // Broadcast in response to a requestSchema event called by the custom application.
 function requestedSchema(data) {
   if (data.error) {
@@ -134,11 +152,9 @@ function showStep(step, stepIndex) {
   switch (currentStep.key) {
     case "step1":
       $("#step1").show();
-      var hasNameCampaignSteps = getMessage();
-      hasNameCampaignSteps = hasNameCampaignSteps.nameCampaign;
       connection.trigger("updateButton", {
         button: "next",
-        enabled: Boolean(hasNameCampaignSteps),
+        enabled: Boolean(hasNameCampaign),
       });
       connection.trigger("updateButton", {
         button: "back",
