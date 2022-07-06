@@ -7,11 +7,11 @@
   "type": "REST",
   "lang": {
     "en-US": {
-      "name": "POC - Custom Activity (UAT)",
+      "name": "POC - Custom Activity (DEV)",
       "description": "A custom Journey Builder activity using workflow API v1.1 format."
     },
     "pt-BR": {
-      "name": "POC -  Atividade Customizada (UAT)",
+      "name": "POC -  Atividade Customizada (DEV)",
       "description": "Uma atividade customizada para journey builder utilizando workflow API V1.1"
     }
   },
