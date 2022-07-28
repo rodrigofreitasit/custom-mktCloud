@@ -19,11 +19,7 @@
     "execute": {
       "inArguments": [],
       "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net",
-      "outArguments": [],
-      "timeout": 100000,
-      "retryCount": 1,
-      "retryDelay": 10000,
-      "concurrentRequests": 5
+      "outArguments": []
     }
   },
   "configurationArguments": {
