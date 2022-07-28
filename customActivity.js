@@ -79,6 +79,7 @@ function initActivity(data) {
 }
 
 function copyToClipboard(text) {
+  console.log('fun copyToClipboard')
   var sampleTextarea = document.createElement("textarea");
   document.body.appendChild(sampleTextarea);
   sampleTextarea.value = text; //save main text in it
@@ -88,20 +89,21 @@ function copyToClipboard(text) {
 }
 
 function textToCopy(data) {
+  console.log('func textToCopy')
   var copyText = `<<${data.textContent}>>`;
   copyToClipboard(copyText);
-  // var txtarea = document.getElementById("message");
-  // var start = txtarea.selectionStart;
-  // var end = txtarea.selectionEnd;
-  // var sel = txtarea.value.substring(start, end);
-  // var finText =
-  //   txtarea.value.substring(0, start) +
-  //   copyText +
-  //   sel +
-  //   txtarea.value.substring(end);
-  // txtarea.value = finText;
-  // txtarea.focus();
-  // txtarea.selectionEnd = end + copyText.length;
+  var txtarea = document.getElementById("message");
+  var start = txtarea.selectionStart;
+  var end = txtarea.selectionEnd;
+  var sel = txtarea.value.substring(start, end);
+  var finText =
+    txtarea.value.substring(0, start) +
+    copyText +
+    sel +
+    txtarea.value.substring(end);
+  txtarea.value = finText;
+  txtarea.focus();
+  txtarea.selectionEnd = end + copyText.length;
 }
 
 // Broadcast in response to a requestSchema event called by the custom application.
@@ -219,6 +221,7 @@ function treatMessage(msg) {
         let nameDE = schema[i].name;
         let varName = `<<${nameDE}>>`;
         messageToTreat[k] = messageToTreat[k].replace(varName, `{{${keyDE}}}`);
+        console.log(messageToTreat[k])
       }
     }
     return messageToTreat;
