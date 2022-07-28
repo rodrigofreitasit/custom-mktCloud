@@ -21,30 +21,25 @@
       "inArguments": [],
       "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net",
       "outArguments": [],
-      "useJwt": true,
-      "customerKey": "0x6b716c736f776c7a6e616378617879706e636e79"
+      "useJwt": true
     }
   },
   "configurationArguments": {
     "save": {
       "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net",
-      "useJwt": true,
-      "customerKey": "0x6b716c736f776c7a6e616378617879706e636e79"
+      "useJwt": true
     },
     "publish": {
       "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net",
-      "useJwt": true,
-      "customerKey": "0x6b716c736f776c7a6e616378617879706e636e79"
+      "useJwt": true
     },
     "validate": {
       "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net",
-      "useJwt": true,
-      "customerKey": "0x6b716c736f776c7a6e616378617879706e636e79"
+      "useJwt": true
     },
     "stop": {
       "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net",
-      "useJwt": true,
-      "customerKey": "0x6b716c736f776c7a6e616378617879706e636e79"
+      "useJwt": true
     }
   },
   "wizardSteps": [
