@@ -20,7 +20,9 @@
     "execute": {
       "inArguments": [],
       "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net",
-      "outArguments": []
+      "outArguments": [],
+      "useJwt": true,
+      "customerKey": "0x6b716c736f776c7a6e616378617879706e636e79"
     }
   },
   "configurationArguments": {
@@ -30,13 +32,19 @@
       "customerKey": "0x6b716c736f776c7a6e616378617879706e636e79"
     },
     "publish": {
-      "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net"
+      "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net",
+      "useJwt": true,
+      "customerKey": "0x6b716c736f776c7a6e616378617879706e636e79"
     },
     "validate": {
-      "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net"
+      "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net",
+      "useJwt": true,
+      "customerKey": "0x6b716c736f776c7a6e616378617879706e636e79"
     },
     "stop": {
-      "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net"
+      "url": "https://337fd80b6bcbda91f5fef78165e7dc30.m.pipedream.net",
+      "useJwt": true,
+      "customerKey": "0x6b716c736f776c7a6e616378617879706e636e79"
     }
   },
   "wizardSteps": [
